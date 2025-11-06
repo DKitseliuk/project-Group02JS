@@ -1,16 +1,22 @@
 /*#region ===== Modal furniture details styles ===== */
 /*#endregion ===== Modal furniture details styles ===== */
 
-.modal {
+.backdrop {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  /* display: none; */
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .product_modal_container {
@@ -130,11 +136,13 @@
 }
 
 #my-rater {
+  width: 100%;
   max-width: 100%;
   height: 15.2px;
   margin-top: 24px;
   margin-bottom: 24px;
   background-color: red;
+  box-sizing: border-box;
 }
 
 .product_modal_colors {
@@ -196,16 +204,17 @@
 }
 
 .product_modal_button {
+  display: block;
   max-width: 310px;
   width: 100%;
   height: 46px;
-  margin-bottom: 0;
-  padding: 10px 24px;
+  margin: 0;
+  padding: 0;
   border-radius: 100px;
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 46px;
   color: #fff;
   background: #6b0609;
   box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
