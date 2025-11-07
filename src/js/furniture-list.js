@@ -86,7 +86,7 @@ function renderFurnitures(furnitures) {
       <ul class="furniture-colors">
       ${markupColor}
       </ul>
-      <p class="furniture-price"><span>${price}</span><span>грн</span></p>
+      <p class="furniture-price">${price} грн</p>
     </div>
     <button class="furniture-button" type="button">Детальніше</button>
     </li>`;
