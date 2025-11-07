@@ -201,19 +201,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #3b5998;
-}
-
-.product_color_circle:first-child {
-  background-color: #8b4513;
-}
-
-.product_color_circle:nth-child(2) {
-  background-color: #2c5f4f;
-}
-
-.product_color_circle:nth-child(3) {
-  background-color: #d4a574;
+  /* Background color will be set dynamically via JavaScript */
 }
 
 /* Description - Mobile */

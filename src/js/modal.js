@@ -152,17 +152,20 @@ function populateModal(furniture) {
     window.starRating.setRating(furniture.rate);
   }
 
-  // Update color circles
-  const colorCircles = document.querySelectorAll('.product_color_circle');
-  colorCircles.forEach((circle, index) => {
-    if (furniture.color[index]) {
-      circle.style.backgroundColor = furniture.color[index];
-      circle.style.display = '';
-    } else {
-      // Hide unused color circles
-      circle.style.display = 'none';
-    }
-  });
+  // Generate color circles dynamically
+  const colorContainer = document.querySelector('.product_colors');
+  if (colorContainer && furniture.color && furniture.color.length > 0) {
+    // Clear existing color circles
+    colorContainer.innerHTML = '';
+
+    // Create new color circles based on API data
+    furniture.color.forEach(colorValue => {
+      const colorCircle = document.createElement('li');
+      colorCircle.classList.add('product_color_circle');
+      colorCircle.style.backgroundColor = colorValue;
+      colorContainer.appendChild(colorCircle);
+    });
+  }
 }
 
 /**
