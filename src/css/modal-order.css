@@ -189,7 +189,7 @@
   }
 }
 
-@media screen and (min-width: 1336px) {
+@media screen and (min-width: 1440px) {
   .modal {
     padding: 64px 64px;
     max-width: 866px;
