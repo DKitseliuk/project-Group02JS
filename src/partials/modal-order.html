@@ -1,64 +1,73 @@
-<div class="backdrop modal-backdrop" data-backdrop-order>
-  <div class="modal order-modal">
-   <button
-      type="button"
-      class="close"
-      aria-label="Close modal window"
-      data-backdrop-modal-order-close
-    >
-      <svg class="icon-close" width="32" height="32" aria-hidden="true">
-        <use href="./img/icons.svg#close"></use>
-      </svg>
-    </button>
-
-    <h2 class="modal-title">Замовити</h2>
-
-    <form class="form-modal">
-      <ul class="form-list">
-        <li class="form-item">
-          <label for="modal-order-user-name" class="form-label">
-            Ім'я<span class="required">*</span>
-          </label>
-          <input
-            class="form-input"
-            type="text"
-            name="modal-order-user-name"
-            id="modal-order-user-name"
-            placeholder="Введіть ваше ім'я"
-            pattern="[A-Za-zА-Яа-яЇїІіЄєҐґ\s]{2,}"
-            title="Ім’я може містити лише літери"
-            required
-          />
-        </li>
-        <li class="form-item">
-          <label for="modal-order-user-phone" class="form-label">Телефон<span class="required">*</span></label>
-          <input
-            class="form-input"
-            type="tel"
-            name="modal-order-user-phone"
-            id="modal-order-user-phone"
-            placeholder="Введіть ваш номер телефону"
-             pattern="^\+?[0-9\s\-]{9,15}$"
-            title="Введіть коректний номер телефону (наприклад, +380XXXXXXXXX)"
-            required
-          />
-          <p class="error-text">Enter valid phone number</p>
-        </li>
-    <li class="form-item">
-  <label for="modal-order-user-comment" class="form-label">Коментар</label>
-  <textarea
-    class="form-input form-textarea"
-    name="modal-order-user-comment"
-    id="modal-order-user-comment"
-    placeholder="Введіть ваш коментар"
-    required
-  ></textarea>
-  <p class="error-text">Please enter your comment</p>
-</li>
-      </ul>
-      <button class="button order-btn" type="submit">
-        Надіслати заявку
+ <div class="backdrop modal-backdrop" data-backdrop-order>
+    <div class="modal order-modal">
+      <button
+        type="button"
+        class="close"
+        aria-label="Close modal window"
+        data-backdrop-order-close
+      >
+        <svg class="icon-close" width="32" height="32" aria-hidden="true">
+          <use href="./img/icons.svg#close"></use>
+        </svg>
       </button>
-    </form>
+
+      <h2 class="modal-title">Замовити</h2>
+
+      <form class="form-modal">
+        <ul class="form-list">
+          <li class="form-item">
+            <label for="user-name" class="form-label">
+              Ім'я<span class="required">*</span>
+            </label>
+            <input
+              class="form-input"
+              type="text"
+              name="user-name"
+              id="user-name"
+              placeholder="Ваше ім'я"
+              pattern="[A-Za-zА-Яа-яЇїІіЄєҐґ'\-\s]{2,}"
+              title="Ім'я може містити лише літери"
+              required
+            />
+            <p class="error-text">Введіть ваше ім'я</p>
+          </li>
+
+          <li class="form-item">
+            <label for="user-phone" class="form-label">
+              Телефон<span class="required">*</span>
+            </label>
+            <input
+              class="form-input"
+              type="tel"
+              name="user-phone"
+              id="user-phone"
+              placeholder="Ваш номер телефону"
+              pattern="^\+?[0-9\s\-]{9,15}$"
+              title="Введіть коректний номер телефону (наприклад, +380XXXXXXXXX)"
+              required
+            />
+            <p class="error-text">Введіть коректний номер телефону</p>
+          </li>
+
+          <li class="form-item">
+            <label for="user-comment" class="form-label">
+              Коментар
+            </label>
+            <textarea
+              class="form-input form-textarea"
+              name="user-comment"
+              id="user-comment"
+              placeholder="Введіть ваш коментар"
+            ></textarea>
+          </li>
+        </ul>
+
+        <button class="button order-btn" type="submit">
+          Надіслати заявку
+        </button>
+
+        <p class="loader is-hidden"></p>
+      </form>
+    </div>
   </div>
-</div>
+
