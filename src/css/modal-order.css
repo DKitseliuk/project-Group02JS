@@ -39,8 +39,8 @@
   transition: opacity 250ms ease-in-out;
 }
 
-.close-icon {
-  fill: #0d0b0a;
+.icon-close {
+  fill: #080c09;
 }
 
 .close:hover,
