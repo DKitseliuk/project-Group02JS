@@ -1,2 +1,65 @@
 /*#region ===== Header styles ===== */
+.header {
+  padding: 15px 0;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+.header-nav {
+  display: none;
+}
+.header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list-item-link {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #080c09;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.list-item-link:hover {
+  opacity: 0.5;
+}
+.shopping-btn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background-color: #6b0609;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-burger-btn {
+  display: block;
+}
+
+@media only screen and (min-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+
+  .header-burger-btn {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .header-nav {
+    display: block;
+  }
+  .header-nav-list {
+    display: flex;
+    gap: 32px;
+  }
+
+  .header-burger-btn {
+    display: none;
+  }
+}
 /*#endregion ===== Header styles ===== */
