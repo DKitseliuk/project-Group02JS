@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       max: 5,
       rating: 4.5, // Initial rating
       step: 0.5, // Half-star support
-      readOnly: false,
+      readOnly: true, // Read-only in modal (display only)
       onChange: (rating) => {
         console.log('New rating:', rating);
         // Add your callback logic here (e.g., send to API)
