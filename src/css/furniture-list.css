@@ -1,23 +1,19 @@
 /*#region ===== Furniture list styles ===== */
 
+.furniture-section {
+  padding: 48px 0;
+}
+
 /* title */
 
 .title-category {
   margin-bottom: 16px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: 0.01em;
-  color: #080c09;
 }
 .description-category {
   margin-bottom: 40px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.6;
-  color: #080c09;
 }
 
 /* categories */
@@ -31,11 +27,11 @@
 
 .category-item {
   width: calc((100% - 16px) / 2);
-  height: 122px;
+  min-height: 122px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px 16px;
+  padding: 32px 16px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   background-size: cover;
   background-position: center;
@@ -44,30 +40,15 @@
   transition: border 350ms ease-in-out, opacity 350ms ease-in-out;
 }
 
-.category-item:hover {
-  border: 8px solid #6b0609;
-  opacity: 0.5;
-}
-
-.category-item-active {
-  border: 8px solid #6b0609;
-}
-
-.category-title {
+.category-name {
   display: block;
-  font-family: 'Raleway', sans-serif;
+  min-width: 126px;
   font-weight: 700;
-  font-size: 18px;
   line-height: 1.4;
   letter-spacing: 0.01em;
   text-align: center;
   color: #ffffff;
   transition: transform 350ms ease-in-out;
-}
-
-.category-item:hover .category-title,
-.category-item:focus .category-title {
-  transform: scale(1.125);
 }
 
 .category-item[data-category-type='all-furniture'] {
@@ -174,15 +155,15 @@
     );
 }
 
-/* products-cards */
+/* furniture-cards */
 
-.products-colors {
+.furniture-colors {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
-.products-color {
+.furniture-color {
   width: 24px;
   height: 24px;
   border-radius: 64px;
@@ -197,29 +178,36 @@
   margin-bottom: 32px;
 }
 
-.list-item {
+.furniture-item {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.products-name {
-  font-family: 'Raleway', sans-serif;
+.furniture-image {
+  border-radius: 8px;
+}
+
+.furniture-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.furniture-name {
   font-weight: 600;
   font-size: 18px;
-  line-height: 1.6;
-  color: #080c09;
 }
 
-.products-price {
-  font-family: 'Raleway', sans-serif;
+.furniture-price {
+  display: flex;
+  justify-content: baseline;
+  gap: 4px;
   font-weight: 600;
   font-size: 20px;
-  line-height: 1.6;
-  color: #080c09;
 }
 
-.products-button {
+.furniture-button {
   border-radius: 100px;
   padding: 10px 24px;
   width: 100%;
@@ -228,18 +216,16 @@
     inset 0 -2px 1px 0 rgba(8, 12, 9, 0.05),
     inset 0 0 0 1px rgba(8, 12, 9, 0.05);
   background: rgba(8, 12, 9, 0.05);
-  font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
-  color: #080c09;
 }
 
 /* load-more-button */
 
 .load-more-button {
   display: block;
-  margin: 0 auto 48px;
+  margin: 0 auto;
   padding: 10px 24px;
   width: 100%;
   height: 46px;
@@ -249,22 +235,11 @@
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
   background-color: #6b0609;
-  font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
   color: #ffffff;
   transition: opacity 350ms ease-in-out, box-shadow 350ms ease-in-out;
-}
-
-.load-more-button:hover,
-.load-more-button:focus {
-  opacity: 0.5;
-}
-
-.load-more-button:active {
-  opacity: 1;
-  box-shadow: none;
 }
 
 .load-more-button:disabled {
@@ -281,17 +256,31 @@
   .category-item {
     width: calc((100% - 3 * 24px) / 4);
 
-    & .category-title {
+    & .category-name {
       min-width: 128px;
     }
+  }
+
+  .load-more-button {
+    max-width: 421px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .category-item {
-    width: calc((100% - 5 * 24px) / 6);
+  .category-item:hover {
+    border: 8px solid #6b0609;
+    opacity: 0.5;
+  }
 
-    & .category-title {
+  .category-item:hover .category-name,
+  .category-item:focus .category-name {
+    transform: scale(1.125);
+  }
+
+  .category-item {
+    width: calc((100% - 6 * 24px) / 7);
+
+    & .category-name {
       min-width: 166px;
     }
   }
@@ -299,9 +288,27 @@
   .category-item:nth-child(n + 7) {
     width: calc((100% - 6 * 24px) / 7);
 
-    & .category-title {
+    & .category-name {
       min-width: 136px;
     }
+  }
+
+  .category-item-active {
+    border: 8px solid #6b0609;
+  }
+
+  .furniture-item {
+    width: calc((100% - 3 * 24px) / 4);
+  }
+
+  .load-more-button:hover,
+  .load-more-button:focus {
+    opacity: 0.5;
+  }
+
+  .load-more-button:active {
+    opacity: 1;
+    box-shadow: none;
   }
 }
 
