@@ -1,8 +1,10 @@
 /*#region ===== Header styles ===== */
-.header {
+/* .header {
   padding: 15px 0;
-}
+} */
 .header-logo {
+  display: block;
+  padding: 18px 0;
   display: flex;
   align-items: center;
 }
@@ -15,11 +17,18 @@
   align-items: center;
   justify-content: space-between;
 }
+.list-item {
+  display: flex;
+  align-items: center;
+}
 .list-item-link {
+  display: block;
+  padding: 22px 0;
   font-size: 16px;
   line-height: 1.6;
   color: #080c09;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.35s;
+  transition-timing-function: ease-in-out;
 }
 .list-item-link:hover {
   opacity: 0.5;
@@ -32,9 +41,12 @@
   padding: 8px 20px;
   border-radius: 100px;
   background-color: #6b0609;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.35s;
+  transition-timing-function: ease-in-out;
 }
-
+.shopping-btn:hover {
+  opacity: 0.5;
+}
 .header-burger-btn {
   display: block;
 }
