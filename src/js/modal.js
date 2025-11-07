@@ -1,3 +1,5 @@
+import { getFurnitureById } from './furniture-api.js';
+
 // Custom Star Rating Component
 class StarRating {
   constructor(container, options = {}) {
@@ -107,6 +109,136 @@ class StarRating {
   }
 }
 
+/**
+ * Populate modal with furniture data
+ * @param {FurnitureModel} furniture - Furniture data model
+ */
+function populateModal(furniture) {
+  // Update main image
+  const mainImg = document.querySelector('.product_modal_img > img');
+  if (mainImg && furniture.getMainImage()) {
+    mainImg.src = furniture.getMainImage();
+    mainImg.alt = furniture.name;
+  }
+
+  // Update additional images
+  const additionalImgs = document.querySelectorAll('.product_modal_img_horizontal img');
+  const additionalImages = furniture.getAdditionalImages();
+  additionalImgs.forEach((img, index) => {
+    if (additionalImages[index]) {
+      img.src = additionalImages[index];
+      img.alt = `${furniture.name} ${index + 2}`;
+    }
+  });
+
+  // Update text content
+  const nameEl = document.querySelector('.product_modal_name');
+  if (nameEl) nameEl.textContent = furniture.name;
+
+  const categoryEl = document.querySelector('.product_modal_category');
+  if (categoryEl) categoryEl.textContent = furniture.getCategoryName();
+
+  const priceEl = document.querySelector('.price_number');
+  if (priceEl) priceEl.textContent = furniture.getFormattedPrice();
+
+  const descriptionEl = document.querySelector('.modal_description');
+  if (descriptionEl) descriptionEl.textContent = furniture.description;
+
+  const sizeEl = document.querySelector('.product_modal_size');
+  if (sizeEl) sizeEl.textContent = `Розміри: ${furniture.sizes}`;
+
+  // Update star rating
+  if (window.starRating) {
+    window.starRating.setRating(furniture.rate);
+  }
+
+  // Update color circles
+  const colorCircles = document.querySelectorAll('.product_color_circle');
+  colorCircles.forEach((circle, index) => {
+    if (furniture.color[index]) {
+      circle.style.backgroundColor = furniture.color[index];
+      circle.style.display = '';
+    } else {
+      // Hide unused color circles
+      circle.style.display = 'none';
+    }
+  });
+}
+
+/**
+ * Open modal and load furniture data
+ * @param {string} furnitureId - Furniture ID
+ */
+async function openFurnitureModal(furnitureId) {
+  const backdrop = document.querySelector('[data-backdrop-furniture-details]');
+
+  if (!backdrop) {
+    console.error('Modal backdrop not found');
+    return;
+  }
+
+  try {
+    // Show modal with loading state
+    backdrop.classList.add('is-open');
+
+    // Fetch furniture data
+    const furniture = await getFurnitureById(furnitureId);
+
+    // Populate modal with data
+    populateModal(furniture);
+
+  } catch (error) {
+    console.error('Failed to load furniture details:', error);
+    // Close modal on error
+    backdrop.classList.remove('is-open');
+    alert('Не вдалося завантажити деталі меблів. Спробуйте ще раз.');
+  }
+}
+
+/**
+ * Close modal
+ */
+function closeFurnitureModal() {
+  const backdrop = document.querySelector('[data-backdrop-furniture-details]');
+  if (backdrop) {
+    backdrop.classList.remove('is-open');
+  }
+}
+
+/**
+ * Initialize modal handlers
+ */
+function initFurnitureModal() {
+  // Listen for clicks on furniture items
+  document.addEventListener('click', (e) => {
+    const furnitureCard = e.target.closest('[data-furniture-id]');
+    if (furnitureCard) {
+      e.preventDefault();
+      const furnitureId = furnitureCard.dataset.furnitureId;
+      openFurnitureModal(furnitureId);
+    }
+  });
+
+  // Close button handler
+  const closeBtn = document.querySelector('.product_modal_close');
+  closeBtn?.addEventListener('click', closeFurnitureModal);
+
+  // Backdrop click handler (click outside modal to close)
+  const backdrop = document.querySelector('[data-backdrop-furniture-details]');
+  backdrop?.addEventListener('click', (e) => {
+    if (e.target === backdrop) {
+      closeFurnitureModal();
+    }
+  });
+
+  // ESC key handler
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeFurnitureModal();
+    }
+  });
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   const raterElement = document.querySelector('#my-rater');
@@ -131,4 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make accessible globally if needed
     window.starRating = starRating;
   }
+
+  // Initialize furniture modal
+  initFurnitureModal();
 });

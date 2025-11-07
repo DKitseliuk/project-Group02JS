@@ -29,7 +29,6 @@
   position: relative;
   width: 100%;
   max-width: 335px;
-  height: 649px;
   padding: 20px;
   color: var(--primary-text-color);
   background-color: var(--card-bg-color);
@@ -269,6 +268,7 @@
 
   .product_modal_container {
     max-width: 704px;
+    height: 1091px;
     padding: 32px;
   }
 
@@ -340,6 +340,7 @@
 @media (min-width: 1090px) {
   .product_modal_container {
     max-width: 1090px;
+    height: 649px;
     padding: 64px;
   }
 
