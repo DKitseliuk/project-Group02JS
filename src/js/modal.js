@@ -178,19 +178,17 @@ async function openFurnitureModal(furnitureId) {
   }
 
   try {
-    // Show modal with loading state
-    backdrop.classList.add('is-open');
-
-    // Fetch furniture data
+    // Fetch furniture data FIRST (before showing modal)
     const furniture = await getFurnitureById(furnitureId);
 
     // Populate modal with data
     populateModal(furniture);
 
+    // Show modal AFTER data is populated
+    backdrop.classList.add('is-open');
+
   } catch (error) {
     console.error('Failed to load furniture details:', error);
-    // Close modal on error
-    backdrop.classList.remove('is-open');
     alert('Не вдалося завантажити деталі меблів. Спробуйте ще раз.');
   }
 }
