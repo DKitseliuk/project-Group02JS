@@ -4,6 +4,9 @@
 @import url('./container.css');
 @import url('./loader.css');
 
+/* Third-party libraries */
+@import url('rater-js/rater-js.css');
+
 /* Sections styles */
 @import url('./header.css');
 @import url('./hero.css');
