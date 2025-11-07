@@ -20,7 +20,7 @@
     <title>Меблерія</title>
     <script type="module" crossorigin src="/project-Group02JS/index.js"></script>
     <link rel="modulepreload" crossorigin href="/project-Group02JS/assets/vendor-D2PysMrw.js">
-    <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-pK_jX0Za.css">
+    <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-zxajiHO8.css">
   </head>
   <body>
     <header class="header">
@@ -30,7 +30,19 @@
 
     <main>
       <section class="section">
-  <div class="container"></div>
+  <div class="container hero-container">
+    <div class="hero-box">
+      <h1 class="hero-title">Створіть свій ідеальний дім</h1>
+      <p class="hero-text">
+        Відкрийте для себе колекцію стильних та комфортних меблів, які
+        перетворять ваш простір. Наша продукція поєднує в собі елегантність та
+        функціональність.
+      </p>
+      <button href="#feedback" type="button" class="hero-button-feedback">
+        Що про нас думають
+      </button>
+    </div>
+  </div>
 </section>
 
       <section class="section furniture-section">
@@ -46,8 +58,36 @@
   </div>
 </section>
 
-      <section class="section">
-  <div class="container"></div>
+      <section id="about-us" class="section">
+  <div class="container about">
+    <div class="about-wrap">
+      <div class="about-content">
+        <h2 class="about-title">Про Меблерію</h2>
+        <p class="about-text">
+          У Меблерії ми прагнемо створювати затишок та функціональність у
+          кожному домі. Наша місія - пропонувати високоякісні меблі, що
+          поєднують у собі сучасний дизайн, довговічність та доступність. Ми
+          віримо, що ідеальний інтер'єр починається з правильних меблів.
+        </p>
+      </div>
+      <picture class="about-picture">
+        <source
+          media="(min-width: 1440px)"
+          srcset="../img/about/About-desktop@1x.webp, ../img/about/About-desktop@2x.webp"
+        />
+        <source
+          media="(min-width: 768px)"
+          srcset="../img/about/About-tablet@1x.webp, ../img/about/About-tablet@2x.webp"
+        />
+        <img
+          class="about-img"
+          srcset="../img/about/About-mobile@1x.webp, ../img/about/About-mobile@2x.webp"
+          src="../img/about/About-mobile@1x.webp"
+          alt="Company of people"
+        />
+      </picture>
+    </div>
+  </div>
 </section>
 
       <section class="section">
@@ -142,7 +182,7 @@
   </div>
 </section>
 
-      <section class="section">
+      <section id="feedback" class="section">
   <div class="container"></div>
 </section>
 
