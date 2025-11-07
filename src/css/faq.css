@@ -1,2 +1,111 @@
 /*#region ===== FAQ styles ===== */
+
+.section-faq {
+  padding: 48px 0;
+}
+
+.section-faq-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.accordion-list {
+  width: 100%;
+  border-bottom: 1px solid rgba(8, 12, 9, 0.15);
+}
+
+.accordion-item {
+  border-top: 1px solid rgba(8, 12, 9, 0.15);
+}
+
+.accordion-title {
+  position: relative;
+  transition: opacity 350ms ease-in-out;
+}
+
+.accordion-svg {
+  fill: #080c09;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
+}
+
+.accordion-item.accordion-active .accordion-svg {
+  transform: rotate(180deg) translate(0, 50%);
+}
+
+.accordion-trigger {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: left;
+  width: 100%;
+  padding: 20px 56px 20px 0;
+  display: block;
+  transition: opacity 350ms ease-in-out;
+}
+
+.accordion-panel {
+  overflow: hidden;
+  transition-property: height, visibility;
+  transition-timing-function: ease-in-out;
+}
+
+.accordion-item.js-enabled .accordion-panel {
+  visibility: hidden;
+}
+.accordion-item.accordion-active .accordion-panel {
+  visibility: visible;
+}
+
+.accordion-text {
+  padding-bottom: 24px;
+  font-size: 16px;
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .accordion-trigger {
+    padding: 22px 56px 22px 0;
+  }
+}
+
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .section-faq {
+    padding: 80px 0;
+  }
+
+  .section-faq-title {
+    font-size: 48px;
+  }
+
+  .accordion-list {
+    max-width: 864px;
+    margin: 0 auto;
+  }
+
+  .accordion-trigger:hover,
+  .accordion-trigger:focus {
+    opacity: 0.5;
+  }
+
+  .accordion-trigger:hover + .accordion-svg,
+  .accordion-trigger:focus + .accordion-svg {
+    opacity: 0.5;
+    transform: scale(1.25) translate(0, -40%);
+  }
+
+  .accordion-item.accordion-active .accordion-trigger:hover + .accordion-svg,
+  .accordion-item.accordion-active .accordion-trigger:focus + .accordion-svg {
+    transform: rotate(180deg) scale(1.25) translate(0, 40%);
+  }
+}
+
 /*#endregion ===== FAQ styles ===== */
