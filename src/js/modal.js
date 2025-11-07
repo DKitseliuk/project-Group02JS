@@ -197,12 +197,22 @@ async function openFurnitureModal(furnitureId) {
 }
 
 /**
- * Close modal
+ * Close furniture modal
  */
 function closeFurnitureModal() {
   const backdrop = document.querySelector('[data-backdrop-furniture-details]');
   if (backdrop) {
     backdrop.classList.remove('is-open');
+  }
+}
+
+/**
+ * Open order modal (handled by someone else's code)
+ */
+function openOrderModal() {
+  const backdrop = document.querySelector('[data-backdrop-order]');
+  if (backdrop) {
+    backdrop.classList.add('is-open');
   }
 }
 
@@ -230,6 +240,13 @@ function initFurnitureModal() {
     if (e.target === backdrop) {
       closeFurnitureModal();
     }
+  });
+
+  // Order button handler - open order modal
+  const orderBtn = document.querySelector('.product_modal_button');
+  orderBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openOrderModal();
   });
 
   // ESC key handler
