@@ -29,6 +29,7 @@
   position: relative;
   width: 100%;
   max-width: 335px;
+  height: 649px;
   padding: 20px;
   color: var(--primary-text-color);
   background-color: var(--card-bg-color);
@@ -98,11 +99,13 @@
   cursor: pointer;
   border-radius: 50%;
   padding: 0;
+  /* margin-bottom: 30px; */
 }
 
 .product_modal_close_icon {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
+  fill: #111;
 }
 
 /* Typography - Mobile */
@@ -337,7 +340,7 @@
 @media (min-width: 1090px) {
   .product_modal_container {
     max-width: 1090px;
-    padding: 16px;
+    padding: 64px;
   }
 
   .product_modal {
