@@ -1,46 +1,85 @@
 import axios from 'axios';
 import Swiper from 'swiper';
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
 
-const reviewsUrl =
-  'https://furniture-store-v2.b.goit.study/api/feedbacks?limit=10&page=1';
-const list = document.querySelector('.reviews-list');
+const reviewsUrl = 'https://furniture-store-v2.b.goit.study/api/feedbacks';
+const list = document.querySelector('.swiper-wrapper');
 
 async function getFeedbacks() {
   try {
-    const response = await axios.get(reviewsUrl);
-    const feedbacks = response.data.feedbacks;
-
-    createFeedbacks(feedbacks);
+    const response = await axios.get(reviewsUrl, {
+      params: {
+        limit: 10,
+      },
+    });
+    return response.data.feedbacks;
   } catch (error) {
     list.innerHTML = '<li>Не вдалося завантажити відгуки</li>';
   }
 }
 
-function createFeedbacks(reviews) {
+function renderFeedbacks(reviews) {
   const markup = reviews
     .map(({ rate, descr, name }) => {
       return `
-        <li class="reviews-item">
-          <p class="rate"> ${rate}</p>
-          <p class="descr">${descr}</p>
-          <p class="name">${name}</p>
+        <li class="swiper-slide">
+        <div class="feedback-item">
+          <p class="feedback-rate"> ${rate}</p>
+          <p class="feedback-descr">${descr}</p>
+          <p class="feedback-author">${name}</p>
+          </div>
         </li>`;
     })
     .join('');
 
-  list.innerHTML = `
-    <div class="swiper reviews-swiper">
-      <div class="swiper-wrapper">
-        ${markup}
-      </div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-pagination"></div>
-    </div>
-  `;
+  list.innerHTML = markup;
 }
 
-getFeedbacks();
-
 export { getFeedbacks };
+
+function initSwiper() {
+  new Swiper('.swiper', {
+    modules: [Navigation, Pagination, Keyboard, Mousewheel],
+    speed: 400,
+    slidesPerGroup: 1,
+    grabCursor: true,
+    loop: false,
+    loopPreventsSliding: true,
+
+    breakpoints: {
+      320: { slidesPerView: 1 },
+      768: { slidesPerView: 2, spaceBetween: 24 },
+      1440: { slidesPerView: 3, spaceBetween: 24 },
+    },
+
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      draggable: true,
+    },
+
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
+  });
+}
+
+getFeedbacks().then(feedbacks => {
+  if (feedbacks) {
+    renderFeedbacks(feedbacks);
+    initSwiper();
+  }
+});

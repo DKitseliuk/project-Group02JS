@@ -1,2 +1,43 @@
 /*#region ===== Feedback styles ===== */
 /*#endregion ===== Feedback styles ===== */
+.feedback-list {
+  display: flex;
+  gap: 24px;
+}
+
+.feedback-item {
+  height: 232px;
+}
+
+.feedback-rate {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+
+.feedback-descr {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.6;
+  color: #080c09;
+  height: 128px;
+  margin-bottom: 24px;
+}
+
+.feedback-author {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #080c09;
+}
+.btn-container {
+  display: flex;
+}
+.feedback-title {
+  padding-bottom: 24px;
+}
+.title-container {
+  margin-bottom: 80px;
+}
