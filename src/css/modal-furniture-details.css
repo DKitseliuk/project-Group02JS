@@ -136,51 +136,48 @@
 }
 
 #my-rater {
-  position: relative !important; /* Required for absolute positioning of children */
-  width: 100px !important; /* 5 stars × 20px (16px star + 4px gap) = 100px */
-  max-width: 100px;
-  height: 16px;
+  width: 100%;
+  max-width: 100%;
+  height: 15.2px;
   margin-top: 24px;
   margin-bottom: 24px;
   box-sizing: border-box;
-  background-color: transparent !important; /* Remove gray background */
 }
 
-/* Custom rater-js styling: white background for empty, black for filled
-#my-rater .star-rating {
-  background-color: #ffffff !important;
-  border: 1px solid #000000;
+/* Star Rating Container */
+#my-rater.star-rating-container {
+  display: flex;
+  gap: 4px;
 }
 
-#my-rater .star-value {
-  background-color: #000000 !important;
-} */
-
-/* Change the background (empty stars) to white with black outline */
-#my-rater .star-bg {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' stroke='black' stroke-width='1' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E") !important;
-  background-size: 20px 16px !important; /* 16px star + 4px gap */
-  background-repeat: repeat-x !important;
-  background-position: left center !important;
-  z-index: 1 !important;
+/* Individual Star */
+#my-rater .star {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.1s ease;
 }
 
-/* Change the filled stars to solid black */
-#my-rater .star-value {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  height: 100% !important;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E") !important;
-  background-size: 20px 16px !important; /* 16px star + 4px gap */
-  background-repeat: repeat-x !important;
-  background-position: left center !important;
-  z-index: 2 !important; /* Ensure filled stars appear on top */
+#my-rater .star:hover {
+  transform: scale(1.1);
+}
+
+/* Empty Star - white with black outline */
+#my-rater .star.empty {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' stroke='black' stroke-width='1.5' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E");
+}
+
+/* Half Star - half black, half white with outline */
+#my-rater .star.half {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3CclipPath id='half'%3E%3Crect x='0' y='0' width='12' height='24'/%3E%3C/clipPath%3E%3C/defs%3E%3Cpath fill='white' stroke='black' stroke-width='1.5' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3Cpath fill='black' clip-path='url(%23half)' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E");
+}
+
+/* Full Star - solid black */
+#my-rater .star.full {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' stroke='black' stroke-width='1.5' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E");
 }
 
 .product_modal_colors {
