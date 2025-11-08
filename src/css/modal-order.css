@@ -29,8 +29,8 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,7 +147,7 @@
   border-radius: 100px;
   background: #6b0609;
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
   text-align: center;
@@ -175,7 +175,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .modal {
+  .order-modal {
     padding: 64px 32px;
     min-height: 573px;
     width: 704px; 
@@ -187,7 +187,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .modal {
+  .order-modal {
     padding: 64px 64px;
     width: 866px;
   }

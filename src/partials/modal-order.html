@@ -29,7 +29,7 @@
               title="Ім'я може містити лише літери"
               required
             />
-            <p class="error-text">Введіть ваше ім'я</p>
+            <p class="error-text">Введіть коректне ім'я</p>
           </li>
 
           <li class="form-item">
@@ -42,8 +42,8 @@
               name="user-phone"
               id="user-phone"
               placeholder="Ваш номер телефону"
-              pattern="^\+?[0-9\s\-]{9,15}$"
-              title="Введіть коректний номер телефону (наприклад, +380XXXXXXXXX)"
+              pattern="[0-9]{12}"
+              title="Введіть коректний номер телефону (наприклад, 380XXXXXXXXX)"
               required
             />
             <p class="error-text">Введіть коректний номер телефону</p>
