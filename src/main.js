@@ -1,11 +1,10 @@
-import { initialHomePage } from './js/handlers';
-
-document.addEventListener('DOMContentLoaded', initialHomePage);
-
-// Import burger-menu
-import { initBurgerMenu } from './js/burger-menu';
-initBurgerMenu();
+import refs from './js/refs';
 import './js/furniture-list';
-import { initialHomePage } from "./js/handlers";
+import { handlerFurnitureLoadMoreBtn, handlerMenuOpenBtn, initialHomePage } from "./js/handlers";
+
 
 document.addEventListener("DOMContentLoaded", initialHomePage);
+
+// 
+refs.menuOpenBtn.addEventListener('click', handlerMenuOpenBtn);
+refs.furnitureLoadMoreBtn.addEventListener('click', handlerFurnitureLoadMoreBtn);
