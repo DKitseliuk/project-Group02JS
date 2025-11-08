@@ -3,8 +3,8 @@ import { CATEGORY_TYPE } from './constants';
 
 const categoriesEl = document.querySelector('.category-list');
 const listEl = document.querySelector('.furniture-list');
-const btnLoadMore = document.querySelector('.load-more-button');
-btnLoadMore.addEventListener('click', loadMoreList);
+const paginationEl = document.querySelector(".pagination")
+
 
 document.addEventListener('DOMContentLoaded', initialHomePage);
 
@@ -13,9 +13,9 @@ let page = 1;
 async function initialHomePage() {
   try {
     const categoriesArr = await getCategories();
-    const listArr = await getFurnitures();
+    const data = await getFurnitures(page);
     renderCategories(categoriesArr);
-    renderFurnitures(listArr.furnitures);
+    renderFurnitures(data);
   } catch (error) {
     console.log(error.message);
   }
@@ -28,25 +28,19 @@ async function getCategories() {
   return categoriesArr;
 }
 
-async function getFurnitures(page = 1) {
+async function getFurnitures(currentPage = 1) {
+  const limit = 8;
   const { data } = await axios.get(
     'https://furniture-store-v2.b.goit.study/api/furnitures',
     {
       params: {
-        page: 1,
-        limit: 8,
+        page: currentPage,
+        limit,
       },
     }
   );
-  return data;
-}
-
-async function loadMoreList() {
-  page++;
-  try {
-  } catch (error) {
-    console.log(error.message);
-  }
+  
+  return { ...data, limit, page: currentPage};
 }
 
 function renderCategories(categoriesArr) {
@@ -69,7 +63,9 @@ function renderCategories(categoriesArr) {
   categoriesEl.insertAdjacentHTML('beforeend', allCategoriesMarkup);
 }
 
-function renderFurnitures(furnitures) {
+function renderFurnitures(data) {
+  const { furnitures, totalItems, limit } = data;
+  const totalPages = Math.ceil(totalItems / limit);
   const listMarkupArr = furnitures
     .map(({ _id: id, images, name, color, price }) => {
       const markupColor = color
@@ -93,5 +89,12 @@ function renderFurnitures(furnitures) {
     })
     .join('');
 
-  listEl.insertAdjacentHTML('beforeend', listMarkupArr);
+  listEl.innerHTML = '';
+  listEl.insertAdjacentHTML('afterbegin', listMarkupArr);
+  // renderPagination(totalPages, page)
 }
+
+function renderPagination() {
+  
+}
+
