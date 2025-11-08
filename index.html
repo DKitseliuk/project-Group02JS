@@ -1,35 +1,68 @@
 <!DOCTYPE html>
 <html lang="uk-UA">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/project-Group02JS/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400..700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
-      integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <title>Меблерія</title>
-    <script type="module" crossorigin src="/project-Group02JS/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/project-Group02JS/assets/vendor-D2PysMrw.js">
-    <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-zxajiHO8.css">
-  </head>
-  <body>
-    <header class="header">
-  <div class="container"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/project-Group02JS/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+    integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Меблерія</title>
+  <script type="module" crossorigin src="/project-Group02JS/index.js"></script>
+  <link rel="modulepreload" crossorigin href="/project-Group02JS/assets/vendor-Dq5VL_jW.js">
+  <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-bxxzF22A.css">
+</head>
+
+<body>
+  <header class="header">
+  <div class="container header-container">
+    <a href="./index.html" class="header-logo" aria-label="logo">
+      <svg class="header-logo-icon" width="158" height="35" aria-hidden="true">
+        <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#logo"></use>
+      </svg>
+    </a>
+    <nav class="header-nav">
+      <ul class="header-nav-list">
+        <li class="list-item">
+          <a href="#furniture-list" class="list-item-link">Наші меблі</a>
+        </li>
+        <li class="list-item">
+          <a href="#about-us" class="list-item-link">Про нас</a>
+        </li>
+        <li class="list-item">
+          <a href="#pupular-furniture" class="list-item-link">Популярне</a>
+        </li>
+        <li class="list-item">
+          <a href="#faq" class="list-item-link">Часті питання</a>
+        </li>
+        <li class="list-item">
+          <a href="#feedback" class="list-item-link">Відгуки</a>
+        </li>
+        <li class="list-item">
+          <a href="#furniture-list" class="shopping-btn">До покупок</a>
+        </li>
+      </ul>
+    </nav>
+    <button
+      aria-label="open-burger-menu"
+      class="header-burger-btn"
+      type="button"
+      data-burger-open
+    >
+      <svg class="burger-btn-icon" width="32" height="32" aria-hidden="true">
+        <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
 </header>
 
 
-    <main>
-      <section class="section">
+  <main>
+    <section class="section">
   <div class="container hero-container">
     <div class="hero-box">
       <h1 class="hero-title">Створіть свій ідеальний дім</h1>
@@ -45,7 +78,7 @@
   </div>
 </section>
 
-      <section class="section furniture-section">
+    <section class="section furniture-section" id="furniture-list">
   <div class="container container-furniture">
     <h2 class="title-category">Наші меблі</h2>
     <p class="description-category">
@@ -58,7 +91,7 @@
   </div>
 </section>
 
-      <section id="about-us" class="section">
+    <section id="about-us" class="section">
   <div class="container about">
     <div class="about-wrap">
       <div class="about-content">
@@ -73,16 +106,16 @@
       <picture class="about-picture">
         <source
           media="(min-width: 1440px)"
-          srcset="../img/about/About-desktop@1x.webp, ../img/about/About-desktop@2x.webp"
+          srcset="/project-Group02JS/assets/About-desktop@1x-whO1iEYp.webp, /project-Group02JS/assets/About-desktop@2x-CcMM8Bmz.webp"
         />
         <source
           media="(min-width: 768px)"
-          srcset="../img/about/About-tablet@1x.webp, ../img/about/About-tablet@2x.webp"
+          srcset="/project-Group02JS/assets/About-tablet@1x-nKRFQtlI.webp, /project-Group02JS/assets/About-tablet@2x-CUS1mUtK.webp"
         />
         <img
           class="about-img"
-          srcset="../img/about/About-mobile@1x.webp, ../img/about/About-mobile@2x.webp"
-          src="../img/about/About-mobile@1x.webp"
+          srcset="/project-Group02JS/assets/About-mobile@1x-B4fR3Hkc.webp, /project-Group02JS/assets/About-mobile@2x-Bp6elhqP.webp"
+          src="/project-Group02JS/assets/About-mobile@1x-B4fR3Hkc.webp"
           alt="Company of people"
         />
       </picture>
@@ -90,13 +123,13 @@
   </div>
 </section>
 
-      <section class="section">
+    <section class="section" id="pupular-furniture">
   <div class="container"></div>
 </section>
 
-      <section class="section section-faq" id="faq">
+    <section class="section section-faq" id="faq">
   <div class="container">
-    <h2 class="section-faq-title">Часті питання</h2>
+    <h2 id="faq" class="section-faq-title">Часті питання</h2>
     <ul class="accordion-list">
       <li class="accordion-item">
         <h3 class="accordion-title">
@@ -181,14 +214,13 @@
     </ul>
   </div>
 </section>
-
-      <section id="feedback" class="section">
+    <section id="feedback" class="section">
   <div class="container"></div>
 </section>
 
-    </main>
+  </main>
 
-    <footer class="footer">
+  <footer class="footer">
   <div class="container">
     <div class="footer__block-wrapper">
       
@@ -275,18 +307,76 @@
 </footer>
 
 
-    <div class="backdrop backdrop-menu" data-backdrop-menu>
+  <div class="burger-menu" data-burger>
+  <div class="burger-menu-wrapper container">
+    <div class="header-burger-menu">
+      <a
+        href="./index.html"
+        class="header-logo burger-header-logo"
+        aria-label="logo"
+      >
+        <svg
+          class="header-logo-icon"
+          width="158"
+          height="35"
+          aria-hidden="true"
+        >
+          <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#logo"></use>
+        </svg>
+      </a>
+      <button
+        type="button"
+        class="burger-menu-close"
+        aria-label="close menu button"
+        data-burger-close
+      >
+        <svg
+          class="burger-menu-close-icon"
+          width="32"
+          height="32"
+          aria-hidden="true"
+        >
+          <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="burger-content">
+      <ul class="content-list">
+        <li class="menu-content-list-item">
+          <a href="#furniture-list" class="list-item-link">Наші меблі</a>
+        </li>
+        <li class="menu-content-list-item">
+          <a href="#about-us" class="list-item-link">Про нас</a>
+        </li>
+        <li class="menu-content-list-item">
+          <a href="#pupular-furniture" class="list-item-link">Популярне</a>
+        </li>
+        <li class="menu-content-list-item">
+          <a href="#faq" class="list-item-link">Часті питання</a>
+        </li>
+        <li class="menu-content-list-item">
+          <a href="#feedback" class="list-item-link">Відгуки</a>
+        </li>
+        <li class="menu-content-list-item burger-content-list-item">
+          <a href="#furniture-list" class="shopping-btn burger-shopping-btn">
+            До покупок
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div class="backdrop backdrop-modal" data-backdrop-furniture-details>
   <div class="modal"></div>
 </div>
 
-    <div class="backdrop backdrop-modal" data-backdrop-furniture-details>
-  <div class="modal"></div>
-</div>
-
-    <div class="backdrop backdrop-modal" data-backdrop-order>
+  <div class="backdrop backdrop-modal" data-backdrop-order>
   <div class="modal"></div>
 </div>
 
 
-  </body>
+</body>
+
 </html>
