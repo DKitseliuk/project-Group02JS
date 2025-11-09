@@ -1,3 +1,4 @@
+import { getFeedbacks } from './js/reviews';
 import refs from './js/refs';
 import './js/furniture-list';
 import { handlerFurnitureLoadMoreBtn, handlerMenuOpenBtn, initialHomePage } from "./js/handlers";
