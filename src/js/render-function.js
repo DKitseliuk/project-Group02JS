@@ -50,6 +50,25 @@ function renderFurnitureFurnitures(furnitures) {
 
     refs.furnitureFurnituresList.insertAdjacentHTML('beforeend', listMarkupArr);
 }
+
+function furnitureShowLoadMoreBtn() {
+  console.log("furnitureLoadMoreBtn show");
+  
+  refs.furnitureLoadMoreBtn.classList.remove('is-hidden');
+}
+
+function furnitureHideLoadMoreBtn() {
+  console.log("furnitureLoadMoreBtn hide");
+  refs.furnitureLoadMoreBtn.classList.add('is-hidden');
+}
+
+function furnitureShowLoader() {
+  refs.furnitureLoader.classList.remove('is-hidden');
+}
+
+function furnitureHideLoader() {
+  refs.furnitureLoader.classList.add('is-hidden');
+}
 //#endregion ===== Furniture =====
 
 //#region ===== Feedback =====
@@ -90,12 +109,14 @@ function showError(input, message) {
 }
 //#endregion ===== Order modal =====
 
-
-
 export {
   renderFurnitureCategories,
   renderFurnitureFurnitures,
-    
+  furnitureShowLoadMoreBtn,
+  furnitureHideLoadMoreBtn,
+  furnitureShowLoader,
+  furnitureHideLoader,
+      
   renderFeedbackFeedbacks,
 
   showOrderLoader,

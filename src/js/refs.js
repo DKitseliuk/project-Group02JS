@@ -9,6 +9,7 @@ const refs = {
     furnitureCategoriesList: document.querySelector('.category-list'),
     furnitureFurnituresList: document.querySelector('.furniture-list'),
     furnitureLoadMoreBtn: document.querySelector('.load-more-button'),
+    furnitureLoader: document.querySelector('div.container-furniture .loader'),
     
     // Feedback elements
     feedbackFeedbacksList: document.querySelector('.swiper-wrapper'),

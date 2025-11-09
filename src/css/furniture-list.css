@@ -251,6 +251,10 @@
   transition: opacity 350ms ease-in-out, box-shadow 350ms ease-in-out;
 }
 
+.load-more-button.is-hidden {
+  display: none;
+}
+
 .load-more-button:disabled {
   opacity: 0.2;
 }

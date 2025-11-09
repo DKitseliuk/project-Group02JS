@@ -5,9 +5,14 @@ import {
   getFeedbackFeedbacks,
   getFurnitureCategories,
   getFurnitureFurnitures,
+  getFurnitureByCategory,
   sendOrder,
 } from './furniture-api';
 import {
+  furnitureHideLoader,
+  furnitureHideLoadMoreBtn,
+  furnitureShowLoader,
+  furnitureShowLoadMoreBtn,
   hideOrderLoader,
   renderFeedbackFeedbacks,
   renderFurnitureCategories,
@@ -22,29 +27,41 @@ import {
 } from './modal-order';
 import iziToast from 'izitoast';
 
+
 let page = null;
+let currentCategory = null;
 
 let currentModelId = null;
 let currentColor = null;
 
-async function initialHomePage() {
-  page = 1;
 
+async function initialHomePage() {
+  currentCategory = 'all';
+  page = 1;  
   try {
     const categoriesArr = await getFurnitureCategories();
     renderFurnitureCategories(categoriesArr);
 
-    const listArr = await getFurnitureFurnitures();
-    renderFurnitureFurnitures(listArr.furnitures);
+    const { furnitures, totalItems, limit } = await getFurnitureFurnitures();
+    renderFurnitureFurnitures(furnitures);
+
+    furnitureHideLoader();
+    if (limit * page < totalItems) {
+      furnitureShowLoadMoreBtn();
+    }
 
     const feedbacksArr = await getFeedbackFeedbacks();
     renderFeedbackFeedbacks(feedbacksArr);
     initialSwiper();
+
+    initialAccordion();
+
   } catch (error) {
     console.log(error.message);
+  } finally { 
+    furnitureHideLoader();
   }
 
-  initialAccordion();
 }
 
 //#region ===== Menu handlers =====
@@ -76,15 +93,52 @@ function handlerMenuLinksList(event) {
 //#endregion ===== Menu handlers =====
 
 //#region ===== Furniture handlers =====
-
-async function handlerFurnitureLoadMoreBtn() {
-  page++;
+async function handlerFurnitureByCategory(event) {
+  if (!event.target.closest('.category-item')) {
+    return;
+  }
+  page = 1;
+  refs.furnitureFurnituresList.innerHTML = '';
+  furnitureHideLoadMoreBtn();
+  furnitureShowLoader();
   try {
+    currentCategory = event.target.closest('.category-item').dataset.categoryId;
+    const { furnitures, totalItems, limit } =
+      currentCategory === 'all'
+        ? await getFurnitureFurnitures(page)
+        : await getFurnitureByCategory(page, currentCategory);
+    renderFurnitureFurnitures(furnitures);    
+    if (limit * page < totalItems) {
+      furnitureShowLoadMoreBtn();
+    }
   } catch (error) {
     console.log(error.message);
+  } finally { 
+    furnitureHideLoader();
   }
 }
 
+async function handlerFurnitureLoadMoreBtn() {
+  page++;
+  furnitureHideLoadMoreBtn();
+  furnitureShowLoader();
+  try {
+    const { furnitures, totalItems, limit } =
+      currentCategory === 'all'
+        ? await getFurnitureFurnitures(page)
+        : await getFurnitureByCategory(page, currentCategory);
+    renderFurnitureFurnitures(furnitures);
+    
+    if (limit * page < totalItems) {
+      console.log(limit * page < totalItems);      
+      furnitureShowLoadMoreBtn();
+    }
+  } catch (error) {
+    console.log(error.message);
+  } finally { 
+    furnitureHideLoader();
+  }
+}
 //#endregion ===== Furniture handlers =====
 
 //#region ===== Order modal handlers =====
@@ -173,6 +227,7 @@ export {
 
   //Export furniture handlers
   handlerFurnitureLoadMoreBtn,
+  handlerFurnitureByCategory,
 
   //Export order modal handlers
   handlerOrderOpenBth,
@@ -183,91 +238,3 @@ export {
 };
 
 // =============== DaniJla-64 commit ===============
-
-import { getFurnitureByCategory } from './furniture-api';
-
-let currentCategory = 'all';
-
-async function initialHomePage() {
-  page = 1;
-  furnitureShowLoader();
-  try {
-    const categoriesArr = await getFurnitureCategories();
-    renderFurnitureCategories(categoriesArr);
-
-    const { furnitures, totalItems, limit } = await getFurnitureFurnitures();
-    renderFurnitureFurnitures(furnitures);
-
-    furnitureHideLoader();
-    if (limit * page < totalItems) {
-      furnitureShowLoadMoreBtn();
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
-async function handlerFurnitureLoadMoreBtn() {
-  page++;
-  furnitureHideLoadMoreBtn();
-  furnitureShowLoader();
-  try {
-    const { furnitures, totalItems, limit } =
-      currentCategory === 'all'
-        ? await getFurnitureFurnitures(page)
-        : await getFurnitureByCategory(page, currentCategory);
-    renderFurnitureFurnitures(furnitures);
-    furnitureHideLoader();
-    if (limit * page < totalItems) {
-      furnitureShowLoadMoreBtn();
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
-async function handlerFurnitureByCategory(event) {
-  if (!event.target.closest('.category-item')) {
-    return;
-  }
-  page = 1;
-  refs.furnitureFurnituresList.innerHTML = '';
-  furnitureHideLoadMoreBtn();
-  furnitureShowLoader();
-  try {
-    currentCategory = event.target.closest('.category-item').dataset.categoryId;
-    const { furnitures, totalItems, limit } =
-      currentCategory === 'all'
-        ? await getFurnitureFurnitures(page)
-        : await getFurnitureByCategory(page, currentCategory);
-    renderFurnitureFurnitures(furnitures);
-    furnitureHideLoader();
-    if (limit * page < totalItems) {
-      furnitureShowLoadMoreBtn();
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
-//#region ===== Furniture LoadMoreBtn =====
-function furnitureShowLoadMoreBtn() {
-  refs.furnitureLoadMoreBtn.classList.remove('is-hidden');
-}
-function furnitureHideLoadMoreBtn() {
-  refs.furnitureLoadMoreBtn.classList.add('is-hidden');
-}
-//#endregion ===== Furniture LoadMoreBtn =====
-//#region ===== Furniture Loader =====
-function furnitureShowLoader() {
-  refs.furnitureLoader.classList.remove('is-hidden');
-}
-function furnitureHideLoader() {
-  refs.furnitureLoader.classList.add('is-hidden');
-}
-//#endregion ===== Furniture Loader =====
-
-export {
-  //Export furniture handlers
-  handlerFurnitureByCategory,
-};

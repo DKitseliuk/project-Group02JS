@@ -24,7 +24,6 @@ async function getFurnitureFurnitures(page = 1) {
       },
     }
   );
-
   return data;
 }
 
