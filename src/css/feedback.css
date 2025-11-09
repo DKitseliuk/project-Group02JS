@@ -34,10 +34,55 @@
 }
 .btn-container {
   display: flex;
+  gap: 16px;
 }
 .feedback-title {
   padding-bottom: 24px;
 }
 .title-container {
   margin-bottom: 80px;
+}
+.btn-prev,
+.btn-next {
+  border: 1px solid rgba(8, 12, 9, 0.15);
+  border-radius: 100px;
+  padding: 12px;
+  width: 48px;
+  height: 48px;
+  transition: background-color 0.5s ease, transform 0.5s ease;
+}
+.nav {
+  margin-top: 48px;
+  display: flex;
+}
+.paginator {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.paginator .swiper-pagination-bullet {
+  background-color: #080c09;
+}
+.btn-prev:hover,
+.btn-next:hover,
+.btn-prev:focus,
+.btn-next:focus {
+  background-color: #975052;
+}
+.btn-next:active,
+.btn-prev:active {
+  background-color: #6b0609;
+}
+.btn-next:disabled,
+.btn-prev:disabled {
+  background-color: #f2f2f2;
+}
+
+.icon-prev:focus,
+.icon-next:focus,
+.icon-next:hover,
+.icon-prev:hover,
+.icon-next:active,
+.icon-prev:active {
+  fill: #f2f2f2;
 }

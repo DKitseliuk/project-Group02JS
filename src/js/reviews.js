@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import Swiper from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -44,7 +45,7 @@ function initSwiper() {
   new Swiper('.swiper', {
     modules: [Navigation, Pagination, Keyboard, Mousewheel],
     speed: 400,
-    slidesPerGroup: 1,
+    slidesPerGroup: 2,
     grabCursor: true,
     loop: false,
     loopPreventsSliding: true,
@@ -56,13 +57,13 @@ function initSwiper() {
     },
 
     pagination: {
-      el: '.swiper-pagination',
+      el: '.paginator',
       clickable: true,
     },
 
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: '.btn-next',
+      prevEl: '.btn-prev',
     },
 
     scrollbar: {
