@@ -9,6 +9,9 @@ const refs = {
     furnitureCategoriesList: document.querySelector('.category-list'),
     furnitureFurnituresList: document.querySelector('.furniture-list'),
     furnitureLoadMoreBtn: document.querySelector('.load-more-button'),
+    
+    // Feedback elements
+    feedbackFeedbacksList: document.querySelector('.swiper-wrapper'),
 
     //Order modal elements
     orderBackdrop: document.querySelector('[data-backdrop-order]'),
@@ -18,3 +21,6 @@ const refs = {
 }
 
 export default refs;
+
+// Feedback elements 
+// furnitureLoader: document.querySelector('.loader'),
