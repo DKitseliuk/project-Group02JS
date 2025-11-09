@@ -1,2 +1,74 @@
 /*#region ===== Header styles ===== */
+.header-logo {
+  display: block;
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+}
+.header-nav {
+  display: none;
+}
+.header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list-item {
+  display: flex;
+  align-items: center;
+}
+.list-item-link {
+  display: block;
+  padding: 22px 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #080c09;
+  transition-duration: 0.35s;
+  transition-timing-function: ease-in-out;
+}
+.list-item-link:hover {
+  opacity: 0.5;
+}
+.shopping-btn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background-color: #6b0609;
+  transition-duration: 0.35s;
+  transition-timing-function: ease-in-out;
+}
+.shopping-btn:hover {
+  opacity: 0.5;
+}
+.header-burger-btn {
+  display: block;
+}
+
+@media only screen and (min-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+
+  .header-burger-btn {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .header-nav {
+    display: block;
+  }
+  .header-nav-list {
+    display: flex;
+    gap: 32px;
+  }
+
+  .header-burger-btn {
+    display: none;
+  }
+}
 /*#endregion ===== Header styles ===== */
