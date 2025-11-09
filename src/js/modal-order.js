@@ -75,21 +75,24 @@ function showError(input, message) {
   }
 }
 
-// Подія input,щоб прибирати помилки під час редагування
+// Подія input,щоб прибирати помилки
+function handleInputEvent(e) {
+  const input = e.target;
+  input.classList.remove('invalid');
+  const errorText = input.parentElement.querySelector('.error-text');
+  if (errorText) errorText.style.opacity = 0;
+}
+
 refs.orderForm.querySelectorAll('.form-input').forEach(input => {
-  input.addEventListener('input', () => {
-    input.classList.remove('invalid');
-    const errorText = input.parentElement.querySelector('.error-text');
-    if (errorText) errorText.style.opacity = 0;
-  });
+  input.addEventListener('input', handleInputEvent);
 });
 
-// Обгортка для сабміту з лоадером та блокуванням закриття
-refs.orderForm.addEventListener('submit', async (e) => {
+async function handleOrderFormSubmit(e) {
   e.preventDefault();
 
   const submitBtn = refs.orderForm.querySelector('button[type="submit"]');
   const loader = refs.orderForm.querySelector('.loader');
+
 
   // Блокуємо кнопку і показуємо лоадер
   submitBtn.disabled = true;
@@ -109,9 +112,11 @@ refs.orderForm.addEventListener('submit', async (e) => {
     };
 
     try {
-      // Відправка POST-запиту
-      const response = await axios.post('/api/orders', formData);
-      console.log('Відповідь сервера:', response.data);
+    const response = await axios.post(
+  'https://furniture-store-v2.b.goit.study/api/orders',
+  formData,
+  { headers: { 'Content-Type': 'application/json' } }
+);
 
       clearForm();
 
@@ -148,11 +153,12 @@ refs.orderForm.addEventListener('submit', async (e) => {
     refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
     refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
   }
-});
+}
 
 export { 
   openOrderModal,
   closeOrderModal,
   validateForm,
-  clearForm
+  clearForm,
+  handleOrderFormSubmit
 };
