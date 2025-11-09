@@ -24,6 +24,7 @@
 
 .accordion-title {
   position: relative;
+  transition: opacity 350ms ease-in-out;
 }
 
 .accordion-svg {
@@ -32,10 +33,10 @@
   right: 0;
   top: 50%;
   transform: translate(0, -50%);
-  transition: transform 350ms ease-in-out;
+  transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
 }
 
-.accordion-item.accordion-active > .accordion-title .accordion-svg {
+.accordion-item.accordion-active .accordion-svg {
   transform: rotate(180deg) translate(0, 50%);
 }
 
@@ -47,7 +48,7 @@
   width: 100%;
   padding: 20px 56px 20px 0;
   display: block;
-  transition: color 350ms ease-in-out;
+  transition: opacity 350ms ease-in-out;
 }
 
 .accordion-panel {
@@ -88,6 +89,22 @@
   .accordion-list {
     max-width: 864px;
     margin: 0 auto;
+  }
+
+  .accordion-trigger:hover,
+  .accordion-trigger:focus {
+    opacity: 0.5;
+  }
+
+  .accordion-trigger:hover + .accordion-svg,
+  .accordion-trigger:focus + .accordion-svg {
+    opacity: 0.5;
+    transform: scale(1.25) translate(0, -40%);
+  }
+
+  .accordion-item.accordion-active .accordion-trigger:hover + .accordion-svg,
+  .accordion-item.accordion-active .accordion-trigger:focus + .accordion-svg {
+    transform: rotate(180deg) scale(1.25) translate(0, 40%);
   }
 }
 

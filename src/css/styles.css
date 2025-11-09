@@ -15,6 +15,7 @@
 @import url('./footer.css');
 
 /* Modal styles */
+@import url('./modal.css');
 @import url('./modal-menu.css');
 @import url('./modal-furniture-details.css');
 @import url('./modal-order.css');
