@@ -27,6 +27,7 @@ function validateForm(form) {
 
   const nameInput = form.querySelector('#user-name');
   const phoneInput = form.querySelector('#user-phone');
+  const commentInput = form.querySelector('#user-comment');
 
   // Скинути попередні стани
   form.querySelectorAll('.error-text').forEach(e => (e.style.opacity = 0));
@@ -47,6 +48,13 @@ function validateForm(form) {
     isValid = false;
   }
 
+  // Коментар
+  const comment = commentInput.value.trim();
+  if (comment.length > 0 && comment.length < 5) {
+    showError(commentInput, 'Коментар має містити щонайменше 5 символів');
+    isValid = false;
+  }
+
   return isValid;
 }
 
@@ -56,6 +64,16 @@ function clearForm() {
   refs.orderForm.querySelectorAll('.error-text').forEach(e => (e.style.opacity = 0));
   refs.orderForm.querySelectorAll('.form-input').forEach(i => i.classList.remove('invalid'));
 }
+
+function showError(input, message) {
+  const errorText = input.parentElement.querySelector('.error-text');
+  input.classList.add('invalid');
+  if (errorText) {
+    errorText.textContent = message;
+    errorText.style.opacity = 1;
+  }
+}
+
 
 export { 
   openOrderModal,
