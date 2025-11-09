@@ -52,6 +52,25 @@ function renderFurnitureFurnitures(furnitures) {
 }
 //#endregion ===== Furniture =====
 
+//#region ===== Feedback =====
+function renderFeedbackFeedbacks(feedbacks) {
+  const feedbacksMarkup = feedbacks
+    .map(({ rate, descr, name }) => {
+      return `
+        <li class="swiper-slide">
+          <div class="feedback-item">
+            <p class="feedback-rate"> ${rate}</p>
+            <p class="feedback-descr">${descr}</p>
+            <p class="feedback-author">${name}</p>
+          </div>
+        </li>`;
+    })
+    .join('');
+
+  refs.feedbackFeedbacksList.insertAdjacentHTML("beforeend", feedbacksMarkup);
+}
+//#endregion ===== Feedback =====
+
 //#region ===== Order modal =====
 function showOrderLoader() {
   refs.orderLoader.classList.remove('is-hidden');
@@ -69,17 +88,17 @@ function showError(input, message) {
     errorText.style.opacity = 1;
   }
 }
-
-
 //#endregion ===== Order modal =====
 
 
 
 export {
-    renderFurnitureCategories,
-    renderFurnitureFurnitures,
+  renderFurnitureCategories,
+  renderFurnitureFurnitures,
+    
+  renderFeedbackFeedbacks,
 
-    showOrderLoader,
-    hideOrderLoader,
-    showError
+  showOrderLoader,
+  hideOrderLoader,
+  showError
 }

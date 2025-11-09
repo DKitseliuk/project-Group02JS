@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL, API_ENDPOINTS, FURNITURES_PER_PAGE } from './constants';
+import { API_BASE_URL, API_ENDPOINTS, FEEDBACKS_PER_PAGE, FURNITURES_PER_PAGE } from './constants';
 
 async function getFurnitureCategories() {
     const { data: categoriesArr } = await axios.get(`${API_BASE_URL}${API_ENDPOINTS.CATEGORIES}`);
@@ -19,15 +19,25 @@ async function getFurnitureFurnitures(page = 1) {
     return data;
 }
 
+async function getFeedbackFeedbacks() {  
+  const { data: { feedbacks } } = await axios.get(`${API_BASE_URL}${API_ENDPOINTS.FEEDBACKS}`, {
+      params: {
+        limit: FEEDBACKS_PER_PAGE,
+      },
+    });
+    return feedbacks;  
+}
+
 async function sendOrder(orderData) {
     const response = await axios.post(`${API_BASE_URL}${API_ENDPOINTS.ORDERS}`, orderData);
     return response;
 }
 
 export {
-    getFurnitureCategories, 
-    getFurnitureFurnitures,
-    sendOrder
+  getFurnitureCategories, 
+  getFurnitureFurnitures,
+  getFeedbackFeedbacks,
+  sendOrder
 }
 
 
