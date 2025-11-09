@@ -1,21 +1,14 @@
 /*#region ===== Modal menu styles ===== */
 .burger-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-  background-color: #fff;
-
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
+  align-items: flex-start;
+  background-color: #ffffff;
+  transition-property: opacity, box-shadow;
   transition-duration: 0.35s;
   transition-timing-function: ease-in-out;
 }
 
 .burger-menu-wrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -27,6 +20,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .burger-header-logo {
   display: flex;
   align-items: center;
@@ -74,18 +68,7 @@ body.no-scroll {
   position: fixed;
   width: 100%;
 }
-@media (min-width: 768px) {
-  .burger-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: auto;
-    bottom: auto;
-    height: auto;
-    background-color: #fff;
-    transition-duration: 0.35s;
-    transition-timing-function: ease-in-out;
-  }
+@media screen and (min-width: 768px) {
   .burger-content-list-item {
     display: flex;
     justify-content: flex-end;
@@ -101,12 +84,7 @@ body.no-scroll {
   .burger-menu.is-open {
     margin-top: 70px;
     background-color: rgba(8, 12, 9, 0.5);
-    width: 100%;
-    height: 100%;
     transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
   }
 
   .burger-menu-wrapper {
@@ -131,7 +109,7 @@ body.no-scroll {
     align-items: flex-end;
   }
 }
-@media (min-width: 900px) {
+@media screen and (min-width: 900px) {
   .burger-menu-wrapper {
     padding: 0 98px 0 25px;
   }
@@ -145,7 +123,7 @@ body.no-scroll {
   }
 }
 
-@media only screen and (min-width: 1440px) {
+@media screen and (min-width: 1440px) {
   .burger-menu {
     display: none;
   }

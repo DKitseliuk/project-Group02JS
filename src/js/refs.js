@@ -9,6 +9,12 @@ const refs = {
     furnitureCategoriesList: document.querySelector('.category-list'),
     furnitureFurnituresList: document.querySelector('.furniture-list'),
     furnitureLoadMoreBtn: document.querySelector('.load-more-button'),
+
+    //Order modal elements
+    orderBackdrop: document.querySelector('[data-backdrop-order]'),
+    orderCloseBtn: document.querySelector('[data-backdrop-order-close]'),
+    orderForm: document.querySelector('.form-modal'),
+    orderLoader: document.querySelector('[data-loader-order]'),
 }
 
 export default refs;

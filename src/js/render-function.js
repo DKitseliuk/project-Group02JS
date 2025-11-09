@@ -52,7 +52,34 @@ function renderFurnitureFurnitures(furnitures) {
 }
 //#endregion ===== Furniture =====
 
+//#region ===== Order modal =====
+function showOrderLoader() {
+  refs.orderLoader.classList.remove('is-hidden');
+}
+
+function hideOrderLoader() {
+  refs.orderLoader.classList.add('is-hidden');
+}
+
+function showError(input, message) {
+  const errorText = input.parentElement.querySelector('.error-text');
+  input.classList.add('invalid');
+  if (errorText) {
+    errorText.textContent = message;
+    errorText.style.opacity = 1;
+  }
+}
+
+
+//#endregion ===== Order modal =====
+
+
+
 export {
     renderFurnitureCategories,
-    renderFurnitureFurnitures
+    renderFurnitureFurnitures,
+
+    showOrderLoader,
+    hideOrderLoader,
+    showError
 }

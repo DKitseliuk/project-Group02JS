@@ -1,39 +1,25 @@
-import axios from 'axios';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+import refs from './refs';
+import { handlerOrderBackdropClick, handlerOrderBackdropEscape, handlerOrderCloseBtn, handlerOrderSubmitForm } from './handlers';
 
-const orderBackdrop = document.querySelector('[data-backdrop-order]');
-const closeOrderBtn = document.querySelector('[data-backdrop-order-close]');
-const orderForm = document.querySelector('.form-modal');
-const loader = document.querySelector('.loader');
-
-let currentModelId = null;
-let currentColor = null;
-
-// Відкриття / закриття модалки
-export function openOrderModal(modelId, color) {
-  currentModelId = modelId;
-  currentColor = color;
-
-  orderBackdrop.classList.remove('is-hidden');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeOrderModal() {
-  orderBackdrop.classList.add('is-hidden');
-  document.body.style.overflow = '';
+// Відкриття модалки
+function openOrderModal() {
+  refs.orderBackdrop.classList.add('is-open');
+  document.body.classList.add('no-scroll');
+  document.addEventListener('keydown', handlerOrderBackdropEscape);
+  refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
+  refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
+  refs.orderForm.addEventListener('submit', handlerOrderSubmitForm);
 }
 
 // Закриття модалки
-closeOrderBtn.addEventListener('click', closeOrderModal);
-orderBackdrop.addEventListener('click', e => {
-  if (e.target === orderBackdrop) closeOrderModal();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !orderBackdrop.classList.contains('is-hidden')) {
-    closeOrderModal();
-  }
-});
+function closeOrderModal() {
+  refs.orderBackdrop.classList.remove('is-open');
+  document.body.classList.remove('no-scroll');
+  document.removeEventListener('keydown', handlerOrderBackdropEscape);
+  refs.orderCloseBtn.removeEventListener('click', handlerOrderCloseBtn);
+  refs.orderBackdrop.removeEventListener('click', handlerOrderBackdropClick); 
+  refs.orderForm.removeEventListener('submit', handlerOrderSubmitForm);
+}
 
 // Валідація форми
 function validateForm(form) {
@@ -64,82 +50,16 @@ function validateForm(form) {
   return isValid;
 }
 
-function showError(input, message) {
-  const errorText = input.parentElement.querySelector('.error-text');
-  input.classList.add('invalid');
-  if (errorText) {
-    errorText.textContent = message;
-    errorText.style.opacity = 1;
-  }
-}
-
-// Лоадер
-function showLoader() {
-  loader.classList.remove('is-hidden');
-}
-
-function hideLoader() {
-  loader.classList.add('is-hidden');
-}
-
 // Очистка форми
 function clearForm() {
-  orderForm.reset();
-  orderForm.querySelectorAll('.error-text').forEach(e => (e.style.opacity = 0));
-  orderForm.querySelectorAll('.form-input').forEach(i => i.classList.remove('invalid'));
+  refs.orderForm.reset();
+  refs.orderForm.querySelectorAll('.error-text').forEach(e => (e.style.opacity = 0));
+  refs.orderForm.querySelectorAll('.form-input').forEach(i => i.classList.remove('invalid'));
 }
 
-// Сабміт форми
-orderForm.addEventListener('submit', async e => {
-  e.preventDefault();
-
-  if (!validateForm(orderForm)) return;
-
-  showLoader();
-
-  const name = orderForm.elements['user-name'].value.trim();
-  const phone = orderForm.elements['user-phone'].value.trim().replace(/\D/g, '');
-  const comment = orderForm.elements['user-comment'].value.trim() || "Немає коментаря";
-
-  const orderData = {
-    name,
-    phone,
-    modelId: currentModelId || "682f9bbf8acbdf505592ac36", 
-    color: currentColor || "#1212ca",                        
-    comment,
-  };
-
-  try {
-  const response = await axios.post(
-    'https://furniture-store-v2.b.goit.study/api/orders',
-    orderData,
-    { headers: { 'Content-Type': 'application/json' } }
-  );
-
-  console.log('Вся відповідь сервера:', response); 
-  console.log('Тільки data:', response.data);     
-    
-  iziToast.success({
-      title: 'Успіх!',
-      message: `Замовлення №${response.data.orderNum} успішно створено.`,
-      position: 'topRight',
-    });
-
-    clearForm();
-    closeOrderModal();
-  } catch (error) {
-    let message = 'Сталася невідома помилка. Спробуйте ще раз.';
-    if (error.response && error.response.data && error.response.data.message) {
-      message = error.response.data.message;
-    }
-
-    iziToast.error({
-      title: 'Помилка',
-      message,
-      position: 'topRight',
-    });
-  } finally {
-    hideLoader();
-  }
-});
-
+export { 
+  openOrderModal,
+  closeOrderModal,
+  validateForm,
+  clearForm
+}
