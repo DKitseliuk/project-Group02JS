@@ -17,5 +17,3 @@ refs.furnitureCategoriesList.addEventListener(
   'click',
   handlerFurnitureByCategory
 );
-
-
