@@ -187,6 +187,7 @@
   border-radius: 8px 8px 24px 24px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 16px;
   transition: box-shadow 250ms ease-in-out;
 }
@@ -249,6 +250,10 @@
   line-height: 1.6;
   color: #ffffff;
   transition: opacity 350ms ease-in-out, box-shadow 350ms ease-in-out;
+}
+
+.is-hidden {
+  display: none;
 }
 
 .load-more-button:disabled {
