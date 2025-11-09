@@ -65,6 +65,7 @@ function clearForm() {
   refs.orderForm.querySelectorAll('.form-input').forEach(i => i.classList.remove('invalid'));
 }
 
+// Показати помилку
 function showError(input, message) {
   const errorText = input.parentElement.querySelector('.error-text');
   input.classList.add('invalid');
@@ -74,10 +75,84 @@ function showError(input, message) {
   }
 }
 
+// Подія input,щоб прибирати помилки під час редагування
+refs.orderForm.querySelectorAll('.form-input').forEach(input => {
+  input.addEventListener('input', () => {
+    input.classList.remove('invalid');
+    const errorText = input.parentElement.querySelector('.error-text');
+    if (errorText) errorText.style.opacity = 0;
+  });
+});
+
+// Обгортка для сабміту з лоадером та блокуванням закриття
+refs.orderForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const submitBtn = refs.orderForm.querySelector('button[type="submit"]');
+  const loader = refs.orderForm.querySelector('.loader');
+
+  // Блокуємо кнопку і показуємо лоадер
+  submitBtn.disabled = true;
+  submitBtn.style.display = 'none';
+  loader.style.display = 'block';
+
+  // Тимчасово прибираємо закриття модалки
+  refs.orderCloseBtn.removeEventListener('click', handlerOrderCloseBtn);
+  refs.orderBackdrop.removeEventListener('click', handlerOrderBackdropClick);
+
+  // Валідація
+  if (validateForm(refs.orderForm)) {
+    const formData = {
+      name: refs.orderForm.querySelector('#user-name').value.trim(),
+      phone: refs.orderForm.querySelector('#user-phone').value.trim(),
+      comment: refs.orderForm.querySelector('#user-comment').value.trim(),
+    };
+
+    try {
+      // Відправка POST-запиту
+      const response = await axios.post('/api/orders', formData);
+      console.log('Відповідь сервера:', response.data);
+
+      clearForm();
+
+      // Відновлюємо кнопку і ховаємо лоадер
+      submitBtn.disabled = false;
+      submitBtn.style.display = 'block';
+      loader.style.display = 'none';
+
+      // Відновлюємо слухачі закриття
+      refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
+      refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
+
+      closeOrderModal();
+    } catch (error) {
+      console.error('Помилка при відправці:', error);
+
+      // Відновлюємо кнопку та лоадер
+      submitBtn.disabled = false;
+      submitBtn.style.display = 'block';
+      loader.style.display = 'none';
+
+      refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
+      refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
+
+      alert('Сталася помилка при відправці. Спробуйте ще раз.');
+    }
+  } else {
+    
+    // Повертаємо кнопку та слухачі якщо не валідна форма 
+    submitBtn.disabled = false;
+    submitBtn.style.display = 'block';
+    loader.style.display = 'none';
+
+    refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
+    refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
+  }
+});
 
 export { 
   openOrderModal,
   closeOrderModal,
   validateForm,
   clearForm
-}
+};
