@@ -19,7 +19,13 @@ async function getFurnitureFurnitures(page = 1) {
     return data;
 }
 
+async function sendOrder(orderData) {
+    const response = await axios.post(`${API_BASE_URL}${API_ENDPOINTS.ORDERS}`, orderData);
+    return response;
+}
+
 export {
     getFurnitureCategories, 
-    getFurnitureFurnitures
+    getFurnitureFurnitures,
+    sendOrder
 }

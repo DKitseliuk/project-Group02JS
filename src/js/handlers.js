@@ -1,10 +1,15 @@
 import refs from './refs';
 import { initialAccordion } from "./helpers";
 import { openBurgerMenu, closeBurgerMenu } from './burger-menu';
-import { getFurnitureCategories, getFurnitureFurnitures } from './furniture-api';
-import { renderFurnitureCategories, renderFurnitureFurnitures } from './render-function';
+import { getFurnitureCategories, getFurnitureFurnitures, sendOrder } from './furniture-api';
+import { hideOrderLoader, renderFurnitureCategories, renderFurnitureFurnitures, showOrderLoader } from './render-function';
+import { openOrderModal, closeOrderModal, validateForm, clearForm } from './modal-order';
+import iziToast from 'izitoast';
 
 let page = null;
+
+let currentModelId = null;
+let currentColor = null;
 
 async function initialHomePage() {
     page = 1;
@@ -61,6 +66,76 @@ async function handlerFurnitureLoadMoreBtn() {
 
 //#endregion ===== Furniture handlers =====
 
+//#region ===== Order modal handlers =====
+function handlerOrderOpenBth(event) {
+    openOrderModal();
+}
+
+function handlerOrderCloseBtn() {
+  closeOrderModal();
+};
+
+function handlerOrderBackdropClick(event) {
+  if (event.target === refs.orderBackdrop) {
+    closeOrderModal();
+  }
+};
+
+function handlerOrderBackdropEscape(event) {
+  if (event.key === 'Escape') {
+    closeOrderModal();
+  }
+};
+
+ async function handlerOrderSubmitForm(event) {
+  event.preventDefault();
+
+  if (!validateForm(refs.orderForm)) return;
+
+  showOrderLoader();
+
+  const name = refs.orderForm.elements['user-name'].value.trim();
+  const phone = refs.orderForm.elements['user-phone'].value.trim().replace(/\D/g, '');
+  const comment = refs.orderForm.elements['user-comment'].value.trim() || "Немає коментаря";
+
+  const orderData = {
+    name,
+    phone,
+    modelId: currentModelId || "682f9bbf8acbdf505592ac36", 
+    color: currentColor || "#1212ca",                        
+    comment,
+  };
+
+  try {
+  const response = await sendOrder(orderData);
+
+  console.log('Вся відповідь сервера:', response); 
+  console.log('Тільки data:', response.data);     
+    
+  iziToast.success({
+      title: 'Успіх!',
+      message: `Замовлення №${response.data.orderNum} успішно створено.`,
+      position: 'topRight',
+    });
+
+    clearForm();
+    closeOrderModal();
+  } catch (error) {
+    let message = 'Сталася невідома помилка. Спробуйте ще раз.';
+    if (error.response && error.response.data && error.response.data.message) {
+      message = error.response.data.message;
+    }
+
+    iziToast.error({
+      title: 'Помилка',
+      message,
+      position: 'topRight',
+    });
+  } finally {
+    hideOrderLoader();
+  }
+};
+//#endregion ===== Order modal handlers =====
 
 export {
     initialHomePage,
@@ -73,7 +148,14 @@ export {
     handlerMenuLinksList,
 
     //Export furniture handlers
-    handlerFurnitureLoadMoreBtn
+    handlerFurnitureLoadMoreBtn,
+
+    //Export order modal handlers
+    handlerOrderOpenBth,
+    handlerOrderCloseBtn,
+    handlerOrderBackdropClick,
+    handlerOrderBackdropEscape,
+    handlerOrderSubmitForm
 };
 
 
