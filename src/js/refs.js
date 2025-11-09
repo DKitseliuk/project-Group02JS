@@ -21,3 +21,6 @@ const refs = {
 }
 
 export default refs;
+
+// Feedback elements 
+// furnitureLoader: document.querySelector('.loader'),
