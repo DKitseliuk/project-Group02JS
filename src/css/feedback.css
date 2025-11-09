@@ -1,5 +1,5 @@
 /*#region ===== Feedback styles ===== */
-/*#endregion ===== Feedback styles ===== */
+
 .feedback-list {
   display: flex;
   gap: 24px;
@@ -16,53 +16,75 @@
 }
 
 .feedback-descr {
-  font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 20px;
-  line-height: 1.6;
-  color: #080c09;
   height: 128px;
   margin-bottom: 24px;
 }
 
 .feedback-author {
-  font-family: 'Raleway', sans-serif;
   font-weight: 700;
   font-size: 16px;
-  line-height: 1.6;
-  color: #080c09;
 }
+
 .btn-container {
   display: flex;
   gap: 16px;
 }
+
 .feedback-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
   padding-bottom: 24px;
 }
+
 .title-container {
   margin-bottom: 80px;
 }
+
 .btn-prev,
 .btn-next {
+  background-color: #f2f2f2;
   border: 1px solid rgba(8, 12, 9, 0.15);
   border-radius: 100px;
-  padding: 12px;
   width: 48px;
   height: 48px;
-  transition: background-color 0.5s ease, transform 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  transition: background-color 0.35s ease-in-out, transform 0.35s ease-in-out;
 }
+
 .nav {
   margin-top: 48px;
   display: flex;
 }
+
 .paginator {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
+
 .paginator .swiper-pagination-bullet {
   background-color: #080c09;
+  transition: background-color 0.35s ease-in-out, opacity 0.35s ease-in-out;
 }
+
+.paginator .swiper-pagination-bullet:hover,
+.paginator .swiper-pagination-bullet:focus {
+  background-color: #975052;
+  opacity: 1;
+}
+
+.paginator .swiper-pagination-bullet:active {
+  background-color: #6b0609;
+  opacity: 1;
+}
+
 .btn-prev:hover,
 .btn-next:hover,
 .btn-prev:focus,
@@ -75,14 +97,27 @@
 }
 .btn-next:disabled,
 .btn-prev:disabled {
-  background-color: #f2f2f2;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
-.icon-prev:focus,
-.icon-next:focus,
-.icon-next:hover,
-.icon-prev:hover,
-.icon-next:active,
-.icon-prev:active {
+.navigation-icon {
+  fill: #080c09;
+  transition: fill 0.35s ease-in-out;
+}
+
+.btn-next:hover .navigation-icon,
+.btn-next:focus .navigation-icon,
+.btn-next:active .navigation-icon,
+.btn-prev:hover .navigation-icon,
+.btn-prev:focus .navigation-icon,
+.btn-prev:active .navigation-icon {
   fill: #f2f2f2;
 }
+
+.btn-prev:disabled .navigation-icon,
+.btn-next:disabled .navigation-icon {
+  pointer-events: none;
+}
+
+/*#endregion ===== Feedback styles ===== */

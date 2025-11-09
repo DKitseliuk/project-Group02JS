@@ -44,8 +44,8 @@ export { getFeedbacks };
 function initSwiper() {
   new Swiper('.swiper', {
     modules: [Navigation, Pagination, Keyboard, Mousewheel],
-    speed: 400,
-    slidesPerGroup: 2,
+    speed: 350,
+    slidesPerGroup: 1,
     grabCursor: true,
     loop: false,
     loopPreventsSliding: true,
