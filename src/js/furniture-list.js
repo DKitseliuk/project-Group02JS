@@ -91,10 +91,43 @@ function renderFurnitures(data) {
 
   listEl.innerHTML = '';
   listEl.insertAdjacentHTML('afterbegin', listMarkupArr);
-  // renderPagination(totalPages, page)
 }
 
+function getVisiblePages(current, total) {
+  const pages = [...Array(total).keys()].map(i => i + 1);
+  if (total <= 5) {
+    return pages;
+  }
+  if (current <= 3) {
+    return [1, 2, 3, `...`, total];
+  }
+ if (current >= total - 2) {
+   return [1, `...`, total - 2, total - 1, total];
+  }
+  return [1, `...`, current - 1, current, current, current + 1, `...`, total];
+}
 function renderPagination() {
-  
+  if (!totalPages || totalPages <= 1) {
+    paginationEl.innerHTML = "";
+    return
+  }
+
+  const visible = getVisiblePages(currentPage, totalPages);
+
+  const prevBtn = `
+  <button class= "page-btn prev" data-action= "prev" ${currentPage === 1 ? `disabled` : ``}>←</button>`;
+
+  const numbers = visible.map(p => {
+    if (p === "...") {
+      return `<span class="page-dotted">...</span>.`
+    }
+    return `<button class= "page-btn number" data-page ="${p}" ${p === currentPage ? `data-current ="true"` : ``}>${p}</button>`;
+
+  }).join("")
+
+  const nextBtn = `
+  <button class= "page-btn next" data-action= "next" ${currentPage === totalPages ? `disabled` : ``}>→</button>`;
+
+  paginationEl.innerHTML = `${prevBtn}, ${numbers}, ${nextBtn}`;
 }
 
