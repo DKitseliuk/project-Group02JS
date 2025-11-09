@@ -1,45 +1,58 @@
 import axios from 'axios';
-import { API_BASE_URL, API_ENDPOINTS, FEEDBACKS_PER_PAGE, FURNITURES_PER_PAGE } from './constants';
+import {
+  API_BASE_URL,
+  API_ENDPOINTS,
+  FEEDBACKS_PER_PAGE,
+  FURNITURES_PER_PAGE,
+} from './constants';
 
 async function getFurnitureCategories() {
-    const { data: categoriesArr } = await axios.get(`${API_BASE_URL}${API_ENDPOINTS.CATEGORIES}`);
-  
-    return categoriesArr;
+  const { data: categoriesArr } = await axios.get(
+    `${API_BASE_URL}${API_ENDPOINTS.CATEGORIES}`
+  );
+
+  return categoriesArr;
 }
 
 async function getFurnitureFurnitures(page = 1) {
-    const { data } = await axios
-        .get(`${API_BASE_URL}${API_ENDPOINTS.FURNITURES}`, {
-            params: {
-                page,
-                limit: FURNITURES_PER_PAGE,
-            },
-        });
-    
-    return data;
+  const { data } = await axios.get(
+    `${API_BASE_URL}${API_ENDPOINTS.FURNITURES}`,
+    {
+      params: {
+        page,
+        limit: FURNITURES_PER_PAGE,
+      },
+    }
+  );
+
+  return data;
 }
 
-async function getFeedbackFeedbacks() {  
-  const { data: { feedbacks } } = await axios.get(`${API_BASE_URL}${API_ENDPOINTS.FEEDBACKS}`, {
-      params: {
-        limit: FEEDBACKS_PER_PAGE,
-      },
-    });
-    return feedbacks;  
+async function getFeedbackFeedbacks() {
+  const {
+    data: { feedbacks },
+  } = await axios.get(`${API_BASE_URL}${API_ENDPOINTS.FEEDBACKS}`, {
+    params: {
+      limit: FEEDBACKS_PER_PAGE,
+    },
+  });
+  return feedbacks;
 }
 
 async function sendOrder(orderData) {
-    const response = await axios.post(`${API_BASE_URL}${API_ENDPOINTS.ORDERS}`, orderData);
-    return response;
+  const response = await axios.post(
+    `${API_BASE_URL}${API_ENDPOINTS.ORDERS}`,
+    orderData
+  );
+  return response;
 }
 
 export {
-  getFurnitureCategories, 
+  getFurnitureCategories,
   getFurnitureFurnitures,
   getFeedbackFeedbacks,
-  sendOrder
-}
-
+  sendOrder,
+};
 
 // Furniture Data Model
 class FurnitureModel {
@@ -87,7 +100,9 @@ class FurnitureModel {
  */
 async function getFurnitureById(id) {
   try {
-    const response = await axios.get(`${API_BASE_URL}/furnitures/${id}`);
+    const response = await axios.get(
+      `${API_BASE_URL}${API_ENDPOINTS.FURNITURES_BY_ID}${id}`
+    );
     return new FurnitureModel(response.data);
   } catch (error) {
     console.error('Error fetching furniture:', error);
