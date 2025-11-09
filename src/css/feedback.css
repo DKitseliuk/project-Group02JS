@@ -1,5 +1,9 @@
 /*#region ===== Feedback styles ===== */
 
+.feedback-section {
+  padding: 64px 0;
+}
+
 .feedback-list {
   display: flex;
   gap: 24px;
@@ -55,7 +59,7 @@
   justify-content: center;
   align-items: center;
   padding: 0;
-  transition: background-color 0.35s ease-in-out, transform 0.35s ease-in-out;
+  transition: background-color 0.35s ease-in-out, opacity 0.35s ease-in-out;
 }
 
 .nav {
@@ -118,6 +122,18 @@
 .btn-prev:disabled .navigation-icon,
 .btn-next:disabled .navigation-icon {
   pointer-events: none;
+}
+
+@media screen and (min-width: 768px) {
+  .feedback-section {
+    padding: 32px 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .feedback-section {
+    padding: 64px 0;
+  }
 }
 
 /*#endregion ===== Feedback styles ===== */

@@ -1,8 +1,8 @@
 import refs from './refs';
-import { initialAccordion } from "./helpers";
+import { initialAccordion, initialSwiper } from "./helpers";
 import { openBurgerMenu, closeBurgerMenu } from './burger-menu';
-import { getFurnitureCategories, getFurnitureFurnitures, sendOrder } from './furniture-api';
-import { hideOrderLoader, renderFurnitureCategories, renderFurnitureFurnitures, showOrderLoader } from './render-function';
+import { getFeedbackFeedbacks, getFurnitureCategories, getFurnitureFurnitures, sendOrder } from './furniture-api';
+import { hideOrderLoader, renderFeedbackFeedbacks, renderFurnitureCategories, renderFurnitureFurnitures, showOrderLoader } from './render-function';
 import { openOrderModal, closeOrderModal, validateForm, clearForm } from './modal-order';
 import iziToast from 'izitoast';
 
@@ -15,10 +15,16 @@ async function initialHomePage() {
     page = 1;
 
     try {
-        const categoriesArr = await getFurnitureCategories();
-        const listArr = await getFurnitureFurnitures();
-        renderFurnitureCategories(categoriesArr);
-        renderFurnitureFurnitures(listArr.furnitures);
+      const categoriesArr = await getFurnitureCategories();
+      renderFurnitureCategories(categoriesArr);
+      
+      const listArr = await getFurnitureFurnitures();        
+      renderFurnitureFurnitures(listArr.furnitures);
+
+      const feedbacksArr = await getFeedbackFeedbacks();
+      renderFeedbackFeedbacks(feedbacksArr);
+      initialSwiper();
+
     } catch (error) {
         console.log(error.message);
     }
