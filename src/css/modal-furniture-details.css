@@ -1,391 +1,169 @@
 /*#region ===== Modal furniture details styles ===== */
-/*#endregion ===== Modal furniture details styles ===== */
 
-/* ============================================
-   BASE STYLES - MOBILE FIRST (335px)
-   ============================================ */
+.furniture-modal {
+  width: 335px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: 64px 20px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  position: relative;
+}
 
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  justify-content: center;
-  align-items: center;
+.furniture-modal-img-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.furniture-modal-img-item {
+  width: calc((100% - 16px) / 2);
+  height: 196px;
+  border-radius: 8px;
+}
+
+.furniture-modal-img-item:first-child {
+  width: 100%;
+  height: 296px;
+}
+
+.furniture-modal-img {
+  border-radius: 8px;
   width: 100%;
   height: 100%;
-}
-
-.backdrop.is-open {
-  display: flex;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.product_modal_container {
-  position: relative;
-  width: 100%;
-  max-width: 335px;
-  padding: 20px;
-  color: #080c09;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.product_modal {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Images - Mobile */
-.product_modal_img {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 12px;
-  order: -1;
-}
-
-.product_modal_img > img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  border-radius: 8px;
-  background: #f8f9fa;
   object-fit: cover;
 }
-
-.product_modal_img_horizontal {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+.furniture-modal-info {
+  margin-bottom: 24px;
 }
 
-.product_modal_img_horizontal img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-/* Text Content - Mobile */
-.product_modal_text {
-  width: 100%;
-}
-
-/* Close Button - Mobile (44px touch target) */
-.product_modal_close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 50%;
-  padding: 0;
-  /* margin-bottom: 30px; */
-}
-
-.product_modal_close_icon {
-  width: 32px;
-  height: 32px;
-  fill: #111;
-}
-
-/* Typography - Mobile */
-.product_modal_name {
-  max-width: 100%;
-  font-family: 'Raleway', sans-serif;
+.furniture-modal-name {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1.3;
   letter-spacing: 0.01em;
-  color: #080c09;
-  margin-bottom: 8px;
 }
 
-.product_modal_category {
-  max-width: 100%;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #080c09;
-  margin-bottom: 12px;
+.furniture-modal-category {
+  font-size: 16px;
 }
 
-.product_modal_price {
-  max-width: 100%;
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  font-family: 'Raleway', sans-serif;
+.furniture-modal-price {
   font-weight: 700;
   font-size: 24px;
   line-height: 1.4;
   letter-spacing: 0.01em;
-  color: #080c09;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
-/* Star Rating - Mobile (Read-only) */
-#my-rater.star-rating-container {
+.furniture-modal-rate {
   display: flex;
   gap: 4px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
-#my-rater .star {
-  width: 16px;
-  height: 16px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* Empty Star - white with black outline */
-#my-rater .star.empty {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' stroke='black' stroke-width='1.5' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E");
-}
-
-/* Half Star - half black, half white with outline */
-#my-rater .star.half {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3CclipPath id='half'%3E%3Crect x='0' y='0' width='12' height='24'/%3E%3C/clipPath%3E%3C/defs%3E%3Cpath fill='white' stroke='black' stroke-width='1.5' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3Cpath fill='black' clip-path='url(%23half)' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E");
-}
-
-/* Full Star - solid black */
-#my-rater .star.full {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' stroke='black' stroke-width='1.5' d='M12 .587l3.668 7.429 8.2 1.191-5.934 5.786 1.4 8.164L12 18.896l-7.334 3.861 1.4-8.164L.132 9.207l8.2-1.191z'/%3E%3C/svg%3E");
-}
-
-/* Colors Section - Mobile */
-.product_modal_colors {
-  max-width: 100%;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #080c09;
+.furniture-modal-subtitle {
+  font-size: 16px;
   margin-bottom: 8px;
 }
 
-.product_colors {
-  max-width: 100%;
+.furniture-modal-colors {
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-  padding: 0;
-  list-style: none;
+  justify-content: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.product_color_circle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  /* Background color will be set dynamically via JavaScript */
+.furniture-modal-color {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  transition: border 350ms ease-in-out;
 }
 
-/* Description - Mobile */
-.modal_description {
-  max-width: 100%;
-  margin-bottom: 20px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #080c09;
-  word-wrap: break-word;
+.furniture-modal-color.current-color {
+  border: 4px solid #838584;
 }
 
-.product_modal_size {
-  max-width: 100%;
-  margin-bottom: 20px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #080c09;
+.furniture-modal-description {
+  font-size: 16px;
+  margin-bottom: 32px;
 }
 
-/* Button - Mobile */
-.product_modal_button {
-  display: block;
+.furniture-modal-size {
+  font-size: 16px;
+}
+
+.furniture-modal-btn {
   width: 100%;
   height: 46px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 100px;
-  font-family: 'Raleway', sans-serif;
+  padding: 10px 24px;
   font-weight: 500;
   font-size: 16px;
-  line-height: 46px;
-  text-align: center;
-  color: #fff;
-  background: #6b0609;
-  cursor: pointer;
+  line-height: 1.6;
+  color: #ffffff;
+  border-radius: 100px;
+  background-color: #6b0609;
   box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
     inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+  transition: opacity 350ms ease-in-out, box-shadow 350ms ease-in-out;
 }
 
-/* ============================================
-   TABLET STYLES (704px and up)
-   ============================================ */
-
-@media (min-width: 704px) {
-  .modal {
-    padding: 32px;
+@media screen and (min-width: 768px) {
+  .furniture-modal {
+    width: 704px;
+    padding: 64px 32px 32px;
   }
 
-  .product_modal_container {
-    max-width: 704px;
-    height: 1091px;
-    padding: 32px;
+  .furniture-modal-description {
+    max-width: 420px;
   }
-
-  .product_modal {
-    gap: 24px;
-  }
-
-  .product_modal_img {
-    gap: 16px;
-  }
-
-  .product_modal_img_horizontal {
-    gap: 16px;
-  }
-
-  /* Typography - Tablet */
-  .product_modal_name {
-    font-size: 32px;
-    margin-bottom: 12px;
-  }
-
-  .product_modal_category {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-
-  .product_modal_price {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  #my-rater.star-rating-container {
-    margin-bottom: 20px;
-  }
-
-  .product_modal_colors {
-    font-size: 16px;
-  }
-
-  .product_colors {
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .product_color_circle {
-    width: 32px;
-    height: 32px;
-  }
-
-  .modal_description {
-    font-size: 16px;
-    margin-bottom: 24px;
-  }
-
-  .product_modal_size {
-    font-size: 16px;
-    margin-bottom: 24px;
-  }
-
-  .product_modal_button {
-    max-width: 310px;
+  .furniture-modal-btn {
+    max-width: 312px;
   }
 }
 
-/* ============================================
-   DESKTOP STYLES (1090px and up)
-   ============================================ */
-
-@media (min-width: 1090px) {
-  .product_modal_container {
-    max-width: 1090px;
-    height: 649px;
+@media screen and (min-width: 1440px) {
+  .furniture-modal {
+    width: 1090px;
     padding: 64px;
+    flex-direction: row;
   }
 
-  .product_modal {
-    display: grid;
-    grid-template-columns: 580px 1fr;
-    gap: 16px;
+  .furniture-modal-img-list {
+    max-width: 580px;
   }
 
-  /* Images - Desktop (left column) */
-  .product_modal_img {
-    order: 0;
-    width: 580px;
-  }
-
-  .product_modal_img > img {
-    width: 580px;
+  .furniture-modal-img-item:first-child {
     height: 308px;
-    aspect-ratio: auto;
   }
 
-  .product_modal_img_horizontal img {
-    width: 282px;
-    height: 197px;
-    aspect-ratio: auto;
-  }
-
-  /* Text Content - Desktop (right column) */
-  .product_modal_text {
-    width: 358px;
-  }
-
-  /* Close Button - Desktop */
-  .product_modal_close {
-    width: 36px;
-    height: 36px;
-  }
-
-  /* Typography - Desktop */
-  .product_modal_name {
+  .furniture-modal-name {
     font-size: 40px;
-    height: 52px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
-  .product_modal_price {
+  .furniture-modal-price {
     font-size: 32px;
   }
 
-  #my-rater.star-rating-container {
-    margin-top: 24px;
-    margin-bottom: 24px;
+  .furniture-modal-btn:hover,
+  .furniture-modal-btn:focus {
+    opacity: 0.5;
+  }
+
+  .furniture-modal-btn:active {
+    opacity: 1;
+    box-shadow: none;
+  }
+
+  .furniture-modal-btn:disabled {
+    opacity: 0.2;
   }
 }
+
+/*#endregion ===== Modal furniture details styles ===== */
