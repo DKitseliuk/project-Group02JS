@@ -25,9 +25,6 @@
             name="user-name"
             id="user-name"
             placeholder="Ваше ім'я"
-            pattern="[A-Za-zА-Яа-яЇїІіЄєҐґ'\-\s]{2,}"
-            title="Ім'я може містити лише літери"
-            required
           />
           <p class="error-text">Введіть коректне ім'я</p>
         </li>
@@ -42,9 +39,6 @@
             name="user-phone"
             id="user-phone"
             placeholder="Ваш номер телефону"
-            pattern="[0-9]{12}"
-            title="Введіть коректний номер телефону (наприклад, 380XXXXXXXXX)"
-            required
           />
           <p class="error-text">Введіть коректний номер телефону</p>
         </li>
@@ -57,6 +51,7 @@
             id="user-comment"
             placeholder="Введіть ваш коментар"
           ></textarea>
+          <p class="error-text">Коментар має містити щонайменше 5 символів</p>
         </li>
       </ul>
 

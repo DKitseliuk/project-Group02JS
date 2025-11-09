@@ -90,6 +90,7 @@
 .form-input:focus {
   border: 1px solid rgba(8, 12, 9, 0.4);
   outline: none;
+  box-shadow: none;
 }
 
 .form-input::placeholder {
