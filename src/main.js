@@ -10,8 +10,4 @@ refs.menuOpenBtn.addEventListener('click', handlerMenuOpenBtn);
 refs.furnitureCategoriesList.addEventListener('click', handlerFurnitureByCategory);
 refs.furnitureLoadMoreBtn.addEventListener('click', handlerFurnitureLoadMoreBtn);
 
-
-
-
-
-
+import './js/popular-furniture.js';
