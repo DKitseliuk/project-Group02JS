@@ -1,5 +1,9 @@
 import refs from './refs';
 import { CATEGORY_TYPE } from './constants';
+import Raty from 'raty-js';
+import starOff from '../img/raty-stars/starOff.svg';
+import starHalf from '../img/raty-stars/starHalf.svg';
+import starOn from '../img/raty-stars/starOn.svg';
 
 //#region ===== Furniture =====
 function renderFurnitureCategories(categoriesArr) {
@@ -89,17 +93,34 @@ function renderFeedbackFeedbacks(feedbacks) {
     .map(({ rate, descr, name }) => {
       return `
         <li class="swiper-slide">
-          <div class="feedback-item">
-            <p class="feedback-rate"> ${rate}</p>
-            <p class="feedback-descr">${descr}</p>
-            <p class="feedback-author">${name}</p>
+        <div class="feedback-item">
+          <div class="feedback-rate" data-rate="${rate}"></div>
+          <p class="feedback-descr">${descr}</p>
+          <p class="feedback-author">${name}</p>
           </div>
         </li>`;
     })
     .join('');
 
-  refs.feedbackFeedbacksList.insertAdjacentHTML('beforeend', feedbacksMarkup);
+  refs.feedbackFeedbacksList.innerHTML = feedbacksMarkup;
+  refs.feedbackFeedbacksList.querySelectorAll('.feedback-rate').forEach(element => renderRaty(element));
 }
+
+function renderRaty(element) {   
+  const rate = Number.parseFloat(element.dataset.rate);  
+  const raty = new Raty(element, {
+      number: 5,
+      score: rate,
+      step: 0.5,
+      readOnly: true,
+      starOff,
+      starOn,
+      starHalf,
+      round: { down: 0.29, full: 0.7, up: 0.8 },
+  });
+  raty.init();
+}
+
 //#endregion ===== Feedback =====
 
 //#region ===== Furniture details modal =====

@@ -58,7 +58,7 @@ async function initialHomePage() {
 
     const feedbacksArr = await getFeedbackFeedbacks();
     renderFeedbackFeedbacks(feedbacksArr);
-    //initialSwiper();
+    initialSwiper();
 
     initialAccordion();
   } catch (error) {
