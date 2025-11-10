@@ -14,9 +14,12 @@
 }
 
 .feedback-rate {
-  font-weight: 700;
-  font-size: 20px;
+  display: flex;
   margin-bottom: 24px;
+}
+
+.feedback-rate img {
+  width: 20px;
 }
 
 .feedback-descr {
@@ -135,5 +138,4 @@
     padding: 64px 0;
   }
 }
-
 /*#endregion ===== Feedback styles ===== */

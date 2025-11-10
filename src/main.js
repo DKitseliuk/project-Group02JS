@@ -1,5 +1,4 @@
 import refs from './js/refs';
-//import './js/furniture-list';
 import { handlerFurnitureByCategory, handlerFurnitureDetailsOpenBtn, handlerFurnitureLoadMoreBtn, handlerMenuOpenBtn, initialHomePage } from "./js/handlers";
 import './js/modal.js';
 
@@ -11,5 +10,4 @@ refs.furnitureCategoriesList.addEventListener('click', handlerFurnitureByCategor
 refs.furnitureLoadMoreBtn.addEventListener('click', handlerFurnitureLoadMoreBtn);
 refs.furnitureFurnituresList.addEventListener('click', handlerFurnitureDetailsOpenBtn);
 
-
-//import './js/popular-furniture.js';
+import './js/popular-furniture.js';
