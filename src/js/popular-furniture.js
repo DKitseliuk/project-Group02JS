@@ -79,6 +79,7 @@ async function initPopular() {
   
   const prev = document.querySelector('.popular-prev');
   const next = document.querySelector('.popular-next');
+  
   const toggleArrows = () => {
     prev.toggleAttribute('disabled', swiper.isBeginning);
     next.toggleAttribute('disabled', swiper.isEnd);
