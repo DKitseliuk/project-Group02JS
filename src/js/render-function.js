@@ -74,6 +74,13 @@ function furnitureShowLoader() {
 function furnitureHideLoader() {
   refs.furnitureLoader.classList.add('is-hidden');
 }
+
+function furnitureToggleActiveCategory(categoryEl) {
+  refs.furnitureCategoriesList.querySelectorAll('.category-item')
+    .forEach(category => category.classList.remove('category-item-active'));  
+  categoryEl.classList.add('category-item-active');
+}
+
 //#endregion ===== Furniture =====
 
 //#region ===== Feedback =====
@@ -117,6 +124,7 @@ function showError(input, message) {
 export {
   renderFurnitureCategories,
   renderFurnitureFurnitures,
+  furnitureToggleActiveCategory,
   furnitureShowLoadMoreBtn,
   furnitureHideLoadMoreBtn,
   furnitureShowLoader,
