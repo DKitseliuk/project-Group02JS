@@ -5,10 +5,15 @@ import 'swiper/css/pagination';
 
 import axios from 'axios';
 
+import {openFurnitureDetailsModal, closeFurnitureDetailsModal} from "./modal";
+import {renderFurnitureDetailsModal, furnitureDetailsToggleCurruntColor} from "./render-function";
+import {getFurnitureById} from "./furniture-api";
+
 const API_BASE = 'https://furniture-store-v2.b.goit.study/api';
 axios.defaults.baseURL = API_BASE;
 
 const popularList = document.querySelector('.popular-list');
+popularList.addEventListener('click', handlerFurnitureDetailsOpenBtn);
 
 async function renderPopular() {
   try {
@@ -23,18 +28,28 @@ async function renderPopular() {
         const { _id, name, images, price, color } = item;
         const img = images[0];
         return `
-          <li class="furniture-item swiper-slide" data-id="${_id}">
-            <div class="furniture-visual">
-              <img src="${img}" alt="${name}" width="310" height="257">
+          <li class="furniture-item swiper-slide" data-furniture-id="${_id}">
+
+            <div class="furniture-data-wrapper">
+
+              <div class="furniture-visual">
+                <img src="${img}" alt="${name}" width="310" height="257">
+              </div>
+
+              <div class="furniture-info">
+
+                <h3 class="furniture-name">${name}</h3>
+                <ul class="color-list">
+                  ${color.map(col => `<li class="color-dot" style="background-color:${col}"></li>`).join('')}
+                </ul>
+                <p class="furniture-price">${price} грн</p>
+
+              </div>
+
+              <button class="furniture-btn" type="button">Детальніше</button>
+
             </div>
-            <div class="furniture-info">
-              <h3 class="furniture-name">${name}</h3>
-              <ul class="color-list">
-                ${color.map(col => `<li class="color-dot" style="background-color:${col}"></li>`).join('')}
-              </ul>
-              <p class="furniture-price">${price} грн</p>
-            </div>
-            <button class="furniture-btn" type="button">Детальніше</button>
+            
           </li>
         `;
       })
@@ -45,6 +60,7 @@ async function renderPopular() {
     console.error(e);
   }
 }
+
 
 async function initPopular() {
 
@@ -90,8 +106,30 @@ async function initPopular() {
 
 initPopular();
 
+let currentModelId = null;
+let currentColor = null;
 
+async function handlerFurnitureDetailsOpenBtn(event) { 
+  if (event.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  currentModelId = event.target.closest('.furniture-item').dataset.furnitureId;
 
+  try {
+    const furnitureDetails = await getFurnitureById(currentModelId);
+    renderFurnitureDetailsModal(furnitureDetails);
+    
+    currentColor = furnitureDetails.color[0];
+    furnitureDetailsToggleCurruntColor(document.querySelector('.furniture-modal-color'));
+
+  } catch (error) {
+    console.log(error.message);    
+  }
+
+  openFurnitureDetailsModal();
+}
+
+closeFurnitureDetailsModal(); 
 
 
 

@@ -2,10 +2,22 @@
 .pupular-furniture-section {
   padding: 48px 0;
 }
+
+.popular-viewport .swiper-wrapper { 
+  align-items: stretch; 
+} 
+
+.popular-viewport .swiper-slide {  
+  display: flex;            
+  flex-direction: column;   
+  height: auto;             
+}
+
 .popular-title {
   font-weight: 700;
-  font-size: 48px;
+  font-size: 36px;
   line-height: 120%;
+  letter-spacing: 0.01em;
   text-align: center;
   color: #080c09;
   margin-bottom: 32px;
@@ -15,6 +27,12 @@
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.furniture-data-wrapper {
+  display: flex; 
+  flex-direction: column; 
+  height: 100% 
 }
 
 .furniture-visual {
@@ -73,6 +91,8 @@
 }
 
 .furniture-btn {
+  margin-top: auto;
+
   border-radius: 100px;
   padding: 10px 24px;
   width: 100%;
@@ -82,6 +102,11 @@
     inset 0 -2px 1px 0 rgba(8, 12, 9, 0.05),
     inset 0 0 0 1px rgba(8, 12, 9, 0.05);
   background: rgba(8, 12, 9, 0.05);
+}
+
+.furniture-btn:hover,
+.furniture-btn:focus {
+  opacity: 0.5;
 }
 
 .popular-controls {
@@ -103,6 +128,18 @@
   background-color: #f2f2f2;
 }
 
+
+.swiper-btn:hover, .arr-icon:hover,
+.swiper-btn:focus .arr-icon:focus {
+  background-color: #975052;
+  fill: #f2f2f2;
+}
+
+.swiper-btn:active {
+  background-color: #6b0609; 
+  fill: #f2f2f2;
+}
+
 .swiper-btn[disabled] {
   opacity: 0.4;
   pointer-events: none;
@@ -122,9 +159,18 @@
 }
 
 @media (min-width: 768px) {
+
   .popular-viewport
     .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
     overflow: visible !important;
   }
+}
+
+@media (min-width: 768px) {
+
+  .popular-title {
+    font-size: 48px;
+}
+
 }
 /*#endregion ===== Popular furniture styles ===== */
