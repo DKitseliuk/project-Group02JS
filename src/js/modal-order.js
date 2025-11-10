@@ -1,4 +1,7 @@
 import refs from './refs';
+import axios from 'axios';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 import { handlerOrderBackdropClick, handlerOrderBackdropEscape, handlerOrderCloseBtn, handlerOrderSubmitForm } from './handlers';
 
 // Відкриття модалки
@@ -75,7 +78,7 @@ function showError(input, message) {
   }
 }
 
-// Подія input,щоб прибирати помилки
+// Подія input, щоб прибирати помилки
 function handleInputEvent(e) {
   const input = e.target;
   input.classList.remove('invalid');
@@ -93,7 +96,6 @@ async function handleOrderFormSubmit(e) {
   const submitBtn = refs.orderForm.querySelector('button[type="submit"]');
   const loader = refs.orderForm.querySelector('.loader');
 
-
   // Блокуємо кнопку і показуємо лоадер
   submitBtn.disabled = true;
   submitBtn.style.display = 'none';
@@ -103,7 +105,6 @@ async function handleOrderFormSubmit(e) {
   refs.orderCloseBtn.removeEventListener('click', handlerOrderCloseBtn);
   refs.orderBackdrop.removeEventListener('click', handlerOrderBackdropClick);
 
-  // Валідація
   if (validateForm(refs.orderForm)) {
     const formData = {
       name: refs.orderForm.querySelector('#user-name').value.trim(),
@@ -112,40 +113,39 @@ async function handleOrderFormSubmit(e) {
     };
 
     try {
-    const response = await axios.post(
-  'https://furniture-store-v2.b.goit.study/api/orders',
-  formData,
-  { headers: { 'Content-Type': 'application/json' } }
-);
+      const response = await axios.post(
+        'https://furniture-store-v2.b.goit.study/api/orders',
+        formData,
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+
+      // Успішне пуш-повідомлення iziToast
+      iziToast.success({
+        title: 'Успіх!',
+        message: `Замовлення №${response.data.orderNum} успішно створено.`,
+        position: 'topRight',
+      });
 
       clearForm();
-
-      // Відновлюємо кнопку і ховаємо лоадер
-      submitBtn.disabled = false;
-      submitBtn.style.display = 'block';
-      loader.style.display = 'none';
-
-      // Відновлюємо слухачі закриття
-      refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
-      refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
-
       closeOrderModal();
     } catch (error) {
-      console.error('Помилка при відправці:', error);
+      const message = error.response?.data?.message || 'Сталася помилка при відправці. Спробуйте ще раз.';
 
-      // Відновлюємо кнопку та лоадер
+      // Пуш-повідомлення помилки
+      iziToast.error({
+        title: 'Помилка',
+        message,
+        position: 'topRight',
+      });
+    } finally {
       submitBtn.disabled = false;
       submitBtn.style.display = 'block';
       loader.style.display = 'none';
 
       refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
       refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
-
-      alert('Сталася помилка при відправці. Спробуйте ще раз.');
     }
   } else {
-    
-    // Повертаємо кнопку та слухачі якщо не валідна форма 
     submitBtn.disabled = false;
     submitBtn.style.display = 'block';
     loader.style.display = 'none';
