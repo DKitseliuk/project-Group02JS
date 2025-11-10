@@ -119,5 +119,11 @@
 .btn-next:disabled .navigation-icon {
   pointer-events: none;
 }
-
+.feedback-rate img {
+  width: 20px;
+}
+.feedback-rate {
+  display: flex;
+  gap: 4px;
+}
 /*#endregion ===== Feedback styles ===== */
