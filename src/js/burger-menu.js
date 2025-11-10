@@ -22,4 +22,6 @@ function closeBurgerMenu() {
 export {
   openBurgerMenu,
   closeBurgerMenu
-}
+};
+
+
