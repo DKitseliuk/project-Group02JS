@@ -137,12 +137,12 @@ async function handlerFurnitureLoadMoreBtn() {
         : await getFurnitureByCategory(page, currentCategory);
     renderFurnitureFurnitures(furnitures);
 
-    if (limit * page < totalItems) {
-      console.log(limit * page < totalItems);
+    if (limit * page < totalItems) {      
       furnitureShowLoadMoreBtn();
     }
   } catch (error) {
-    console.log(error.message);
+    page--;
+    furnitureShowLoadMoreBtn();    
   } finally {
     furnitureHideLoader();
   }
@@ -165,9 +165,6 @@ async function handlerFurnitureDetailsOpenBtn(event) {
     console.log(error.message);    
   }
 
-  //вибір першого кольору
-  console.log(currentModelId);
-  console.log(currentColor);
   openFurnitureDetailsModal();
 }
 

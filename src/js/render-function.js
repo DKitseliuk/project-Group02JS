@@ -61,13 +61,10 @@ function renderFurnitureFurnitures(furnitures) {
 }
 
 function furnitureShowLoadMoreBtn() {
-  console.log('furnitureLoadMoreBtn show');
-
   refs.furnitureLoadMoreBtn.classList.remove('is-hidden');
 }
 
-function furnitureHideLoadMoreBtn() {
-  console.log('furnitureLoadMoreBtn hide');
+function furnitureHideLoadMoreBtn() {  
   refs.furnitureLoadMoreBtn.classList.add('is-hidden');
 }
 
@@ -116,7 +113,7 @@ function renderRaty(element) {
       starOff,
       starOn,
       starHalf,
-      round: { down: 0.29, full: 0.7, up: 0.8 },
+      round: { down: 0.29, full: 0.79, up: 0.8 },
   });
   raty.init();
 }
@@ -169,7 +166,7 @@ function renderFurnitureDetailsModal(furnitureDetails) {
     <h3 class="furniture-modal-name">${name}</h3>
     <p class="furniture-modal-category">${categoryName}</p>
     <p class="furniture-modal-price">${price} грн</p>
-    <div class="furniture-modal-rate">${rate}</div>
+    <div class="furniture-modal-rate" data-rate="${rate}"></div>
     <p class="furniture-modal-subtitle">Колір</p>
     <ul class="furniture-modal-colors">${colorsMarkup}</ul>
     <p class="furniture-modal-description">${description}</p>
@@ -177,6 +174,7 @@ function renderFurnitureDetailsModal(furnitureDetails) {
   `
   refs.furnitureDetailsImages.innerHTML = imagesMarkup;
   refs.furnitureDetailsInfo.innerHTML = infoMarkup;
+  renderRaty(refs.furnitureDetailsInfo.querySelector('.furniture-modal-rate'));
 }
 
 function furnitureDetailsToggleCurruntColor(colorEl) {
