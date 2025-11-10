@@ -1,3 +1,70 @@
-<div class="backdrop backdrop-modal" data-backdrop-furniture-details>
-  <div class="modal"></div>
+<div class="backdrop" data-backdrop-furniture-details>
+  <div class="furniture-modal">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close modal window"
+      data-backdrop-furniture-close
+    >
+      <svg class="icon-close" width="32" height="32" aria-hidden="true">
+        <use href="/img/icons.svg#close"></use>
+      </svg>
+    </button>
+
+    <ul class="furniture-modal-img-list">
+      <li class="furniture-modal-img-item">
+        <img
+          class="furniture-modal-img"
+          src="https://ftp.goit.study/img/furniture/682f9bbf8acbdf505592ac42_1.jpg"
+          alt="furniture 1"
+          loading="lazy"
+        />
+      </li>
+      <li class="furniture-modal-img-item">
+        <img
+          class="furniture-modal-img"
+          src="https://ftp.goit.study/img/furniture/682f9bbf8acbdf505592ac42_2.jpg"
+          alt="furniture 2"
+          loading="lazy"
+        />
+      </li>
+      <li class="furniture-modal-img-item">
+        <img
+          class="furniture-modal-img"
+          src="https://ftp.goit.study/img/furniture/682f9bbf8acbdf505592ac42_3.jpg"
+          alt="furniture 3"
+          loading="lazy"
+        />
+      </li>
+    </ul>
+    <div class="furniture-modal-box">
+      <div class="furniture-modal-info">
+        <h3 class="furniture-modal-name">Софа Oslo</h3>
+        <p class="furniture-modal-category">Дивани</p>
+        <p class="furniture-modal-price">9 999 грн</p>
+        <div class="furniture-modal-rate"></div>
+        <p class="furniture-modal-subtitle">Колір</p>
+        <ul class="furniture-modal-colors">
+          <li
+            class="furniture-modal-color current-color"
+            style="background-color: aqua"
+          ></li>
+          <li class="furniture-modal-color" style="background-color: aqua"></li>
+          <li class="furniture-modal-color" style="background-color: aqua"></li>
+        </ul>
+        <p class="furniture-modal-description">
+          Класичний диван з м'якими подушками та високою спинкою, ідеальний для
+          сімейного відпочинку. Оббивка з якісної зносостійкої тканини.
+        </p>
+        <p class="furniture-modal-size">Розміри: 280x180x85</p>
+      </div>
+      <button
+        type="button"
+        class="furniture-modal-btn"
+        data-backdrop-furniture-order
+      >
+        Перейти до замовлення
+      </button>
+    </div>
+  </div>
 </div>
