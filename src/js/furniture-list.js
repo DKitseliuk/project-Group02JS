@@ -8,7 +8,7 @@ const paginationEl = document.querySelector(".pagination")
 
 document.addEventListener('DOMContentLoaded', initialHomePage);
 
-let page = 1;
+let page = 2;
 
 async function initialHomePage() {
   try {
@@ -64,7 +64,7 @@ function renderCategories(categoriesArr) {
 }
 
 function renderFurnitures(data) {
-  const { furnitures, totalItems, limit } = data;
+  const { furnitures, totalItems, limit, page: currentPage } = data;
   const totalPages = Math.ceil(totalItems / limit);
   const listMarkupArr = furnitures
     .map(({ _id: id, images, name, color, price }) => {
@@ -91,6 +91,7 @@ function renderFurnitures(data) {
 
   listEl.innerHTML = '';
   listEl.insertAdjacentHTML('afterbegin', listMarkupArr);
+  renderPagination(currentPage, totalPages);
 }
 
 function getVisiblePages(current, total) {
@@ -99,14 +100,15 @@ function getVisiblePages(current, total) {
     return pages;
   }
   if (current <= 3) {
-    return [1, 2, 3, `...`, total];
+    return [1, 2, 3, "...", total];
   }
  if (current >= total - 2) {
-   return [1, `...`, total - 2, total - 1, total];
+   return [1, "...", total - 2, total - 1, total];
   }
-  return [1, `...`, current - 1, current, current, current + 1, `...`, total];
+  return [1, "...", current - 1, current, current + 1, "...", total];
 }
-function renderPagination() {
+
+function renderPagination(currentPage, totalPages) {
   if (!totalPages || totalPages <= 1) {
     paginationEl.innerHTML = "";
     return
@@ -119,7 +121,7 @@ function renderPagination() {
 
   const numbers = visible.map(p => {
     if (p === "...") {
-      return `<span class="page-dotted">...</span>.`
+      return `<span class="page-dotted">...</span>`
     }
     return `<button class= "page-btn number" data-page ="${p}" ${p === currentPage ? `data-current ="true"` : ``}>${p}</button>`;
 
@@ -128,6 +130,32 @@ function renderPagination() {
   const nextBtn = `
   <button class= "page-btn next" data-action= "next" ${currentPage === totalPages ? `disabled` : ``}>→</button>`;
 
-  paginationEl.innerHTML = `${prevBtn}, ${numbers}, ${nextBtn}`;
+  paginationEl.innerHTML = `${prevBtn}${numbers}${nextBtn}`;
+}
+
+paginationEl.addEventListener("click", changePage);
+
+
+async function changePage (event) {
+  const btn = event.target.closest("button");
+  if (!btn) return;
+  if (btn.disabled) return;
+  if (btn.dataset.action === "prev") {
+    page = Math.max(1, page - 1);
+  } else if (btn.dataset.action === "next") {
+    page = page + 1;
+  } else if (btn.dataset.page) {
+    page = Number(btn.dataset.page);
+  } else {
+    return
+  }
+
+  try {
+    const data = await getFurnitures(page);
+    renderFurnitures(data);
+  } catch (error) {
+    console.log(error.message);
+  }
+  listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
