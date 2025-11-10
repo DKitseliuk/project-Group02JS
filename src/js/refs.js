@@ -12,7 +12,7 @@ const refs = {
   furnitureLoader: document.querySelector('div.container-furniture .loader'),
 
   // Feedback elements
-  feedbackFeedbacksList: document.querySelector('.swiper-wrapper'),
+  feedbackFeedbacksList: document.querySelector('.feedback-swiper-wrapper'),
 
   //Furniture details modal elements
   furnitureDetailsBackdrop: document.querySelector('[data-backdrop-furniture-details]'),
