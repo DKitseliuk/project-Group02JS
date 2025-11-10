@@ -14,6 +14,15 @@ const refs = {
   // Feedback elements
   feedbackFeedbacksList: document.querySelector('.swiper-wrapper'),
 
+  //Furniture details modal elements
+  furnitureDetailsBackdrop: document.querySelector('[data-backdrop-furniture-details]'),
+  furnitureDetailsModal: document.querySelector('.furniture-modal'),
+  furnitureDetailsCloseBtn: document.querySelector('[data-backdrop-furniture-close]'),
+  furnitureDetailsImages: document.querySelector('.furniture-modal-img-list'),
+  furnitureDetailsInfo: document.querySelector('.furniture-modal-info'),
+  furnitureDetailsOrderBtn: document.querySelector('[data-backdrop-furniture-order'),
+  
+
   //Order modal elements
   orderBackdrop: document.querySelector('[data-backdrop-order]'),
   orderCloseBtn: document.querySelector('[data-backdrop-order-close]'),

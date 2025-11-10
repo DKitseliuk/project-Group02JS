@@ -7,8 +7,10 @@ import {
   getFurnitureFurnitures,
   getFurnitureByCategory,
   sendOrder,
+  getFurnitureById,
 } from './furniture-api';
 import {
+  furnitureDetailsToggleCurruntColor,
   furnitureHideLoader,
   furnitureHideLoadMoreBtn,
   furnitureShowLoader,
@@ -17,6 +19,7 @@ import {
   hideOrderLoader,
   renderFeedbackFeedbacks,
   renderFurnitureCategories,
+  renderFurnitureDetailsModal,
   renderFurnitureFurnitures,
   showOrderLoader,
 } from './render-function';
@@ -27,6 +30,7 @@ import {
   clearForm,
 } from './modal-order';
 import iziToast from 'izitoast';
+import { closeFurnitureDetailsModal, openFurnitureDetailsModal } from './modal';
 
 let page = null;
 let currentCategory = null;
@@ -54,7 +58,7 @@ async function initialHomePage() {
 
     const feedbacksArr = await getFeedbackFeedbacks();
     renderFeedbackFeedbacks(feedbacksArr);
-    initialSwiper();
+    //initialSwiper();
 
     initialAccordion();
   } catch (error) {
@@ -143,13 +147,64 @@ async function handlerFurnitureLoadMoreBtn() {
     furnitureHideLoader();
   }
 }
-//#endregion ===== Furniture handlers =====
 
-//#region ===== Order modal handlers =====
-function handlerOrderOpenBth(event) {
+async function handlerFurnitureDetailsOpenBtn(event) { 
+  if (event.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  currentModelId = event.target.closest('.furniture-item').dataset.furnitureId;
+
+  try {
+    const furnitureDetails = await getFurnitureById(currentModelId);
+    renderFurnitureDetailsModal(furnitureDetails);
+    
+    currentColor = furnitureDetails.color[0];
+    furnitureDetailsToggleCurruntColor(document.querySelector('.furniture-modal-color'));
+
+  } catch (error) {
+    console.log(error.message);    
+  }
+
+  //вибір першого кольору
+  console.log(currentModelId);
+  console.log(currentColor);
+  openFurnitureDetailsModal();
+}
+
+function handlerFurnitureDetailsCloseBtn() {
+  closeFurnitureDetailsModal();
+}
+
+function handlerFurnitureDetailsBackdropClick(event) {
+  if (event.target === refs.furnitureDetailsBackdrop) {
+    closeFurnitureDetailsModal();
+  }
+}
+
+function handlerFurnitureDetailsBackdropEscape(event) {
+  if (event.key === 'Escape') {
+    closeFurnitureDetailsModal();
+  }
+}
+
+function handlerFurnitureDetailsOrderBtn(event) {
+  closeFurnitureDetailsModal();
   openOrderModal();
 }
 
+function handlerFurnitureDetailsSelectColor(event) {
+  if (event.target.nodeName !== "LI") {
+    return;
+  }
+  currentColor = event.target.dataset.color;
+  furnitureDetailsToggleCurruntColor(event.target);
+}
+
+
+
+//#endregion ===== Furniture handlers =====
+
+//#region ===== Order modal handlers =====
 function handlerOrderCloseBtn() {
   closeOrderModal();
 }
@@ -232,9 +287,16 @@ export {
   //Export furniture handlers
   handlerFurnitureLoadMoreBtn,
   handlerFurnitureByCategory,
+  handlerFurnitureDetailsOpenBtn,
 
-  //Export order modal handlers
-  handlerOrderOpenBth,
+  //Export furniture detail modal handlers  
+  handlerFurnitureDetailsCloseBtn,
+  handlerFurnitureDetailsBackdropClick,
+  handlerFurnitureDetailsBackdropEscape,
+  handlerFurnitureDetailsSelectColor,
+  handlerFurnitureDetailsOrderBtn,
+
+  //Export order modal handlers  
   handlerOrderCloseBtn,
   handlerOrderBackdropClick,
   handlerOrderBackdropEscape,

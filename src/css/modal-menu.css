@@ -63,11 +63,11 @@
   visibility: visible;
   pointer-events: auto;
 }
+
 body.no-scroll {
   overflow: hidden;
-  position: fixed;
-  width: 100%;
 }
+
 @media screen and (min-width: 768px) {
   .burger-content-list-item {
     display: flex;
