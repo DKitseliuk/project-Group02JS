@@ -4,35 +4,40 @@ import { CATEGORY_TYPE } from './constants';
 //#region ===== Furniture =====
 function renderFurnitureCategories(categoriesArr) {
   const allCategoriesArr = [
-        { _id: 'all', name: 'Всі товари' },
-        ...categoriesArr,
-    ];
-    
+    { _id: 'all', name: 'Всі товари' },
+    ...categoriesArr,
+  ];
+
   const allCategoriesMarkup = allCategoriesArr
-    .map(
-        ({ _id: id, name }) => {
-        return `
+    .map(({ _id: id, name }) => {
+      return `
         <li class="category-item"
             data-category-id="${id}" 
-            data-category-type="${ CATEGORY_TYPE[name] || 'unknown'}"
+            data-category-type="${CATEGORY_TYPE[name] || 'unknown'}"
         >
             <p class="category-name">${name}</p>
         </li>
-        `
+        `;
     })
     .join('');
 
-    refs.furnitureCategoriesList.insertAdjacentHTML('beforeend', allCategoriesMarkup);
+  refs.furnitureCategoriesList.insertAdjacentHTML(
+    'beforeend',
+    allCategoriesMarkup
+  );
 }
 
 function renderFurnitureFurnitures(furnitures) {
-    const listMarkupArr = furnitures
-        .map(({ _id: id, images, name, color, price }) => {
-                const markupColor = color
-                .map(clr => `<li class="furniture-color" style="background-color: ${clr};"></li>`)
-            .join('');
-            
-            return `
+  const listMarkupArr = furnitures
+    .map(({ _id: id, images, name, color, price }) => {
+      const markupColor = color
+        .map(
+          clr =>
+            `<li class="furniture-color" style="background-color: ${clr};"></li>`
+        )
+        .join('');
+
+      return `
             <li class="furniture-item" data-category-id="${id}">
                 <img class="furniture-image" src="${images[0]}" alt="${name}"/>
                 <div class="furniture-info">
@@ -45,20 +50,20 @@ function renderFurnitureFurnitures(furnitures) {
                 <button class="furniture-button" type="button">Детальніше</button>
             </li>
             `;
-        })
-        .join('');
+    })
+    .join('');
 
-    refs.furnitureFurnituresList.insertAdjacentHTML('beforeend', listMarkupArr);
+  refs.furnitureFurnituresList.insertAdjacentHTML('beforeend', listMarkupArr);
 }
 
 function furnitureShowLoadMoreBtn() {
-  console.log("furnitureLoadMoreBtn show");
-  
+  console.log('furnitureLoadMoreBtn show');
+
   refs.furnitureLoadMoreBtn.classList.remove('is-hidden');
 }
 
 function furnitureHideLoadMoreBtn() {
-  console.log("furnitureLoadMoreBtn hide");
+  console.log('furnitureLoadMoreBtn hide');
   refs.furnitureLoadMoreBtn.classList.add('is-hidden');
 }
 
@@ -86,7 +91,7 @@ function renderFeedbackFeedbacks(feedbacks) {
     })
     .join('');
 
-  refs.feedbackFeedbacksList.insertAdjacentHTML("beforeend", feedbacksMarkup);
+  refs.feedbackFeedbacksList.insertAdjacentHTML('beforeend', feedbacksMarkup);
 }
 //#endregion ===== Feedback =====
 
@@ -116,10 +121,8 @@ export {
   furnitureHideLoadMoreBtn,
   furnitureShowLoader,
   furnitureHideLoader,
-      
   renderFeedbackFeedbacks,
-
   showOrderLoader,
   hideOrderLoader,
-  showError
-}
+  showError,
+};

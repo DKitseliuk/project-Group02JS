@@ -27,17 +27,15 @@ import {
 } from './modal-order';
 import iziToast from 'izitoast';
 
-
 let page = null;
 let currentCategory = null;
 
 let currentModelId = null;
 let currentColor = null;
 
-
 async function initialHomePage() {
   currentCategory = 'all';
-  page = 1;  
+  page = 1;
   try {
     const categoriesArr = await getFurnitureCategories();
     renderFurnitureCategories(categoriesArr);
@@ -55,13 +53,11 @@ async function initialHomePage() {
     initialSwiper();
 
     initialAccordion();
-
   } catch (error) {
     console.log(error.message);
-  } finally { 
+  } finally {
     furnitureHideLoader();
   }
-
 }
 
 //#region ===== Menu handlers =====
@@ -107,13 +103,13 @@ async function handlerFurnitureByCategory(event) {
       currentCategory === 'all'
         ? await getFurnitureFurnitures(page)
         : await getFurnitureByCategory(page, currentCategory);
-    renderFurnitureFurnitures(furnitures);    
+    renderFurnitureFurnitures(furnitures);
     if (limit * page < totalItems) {
       furnitureShowLoadMoreBtn();
     }
   } catch (error) {
     console.log(error.message);
-  } finally { 
+  } finally {
     furnitureHideLoader();
   }
 }
@@ -128,14 +124,14 @@ async function handlerFurnitureLoadMoreBtn() {
         ? await getFurnitureFurnitures(page)
         : await getFurnitureByCategory(page, currentCategory);
     renderFurnitureFurnitures(furnitures);
-    
+
     if (limit * page < totalItems) {
-      console.log(limit * page < totalItems);      
+      console.log(limit * page < totalItems);
       furnitureShowLoadMoreBtn();
     }
   } catch (error) {
     console.log(error.message);
-  } finally { 
+  } finally {
     furnitureHideLoader();
   }
 }
@@ -238,3 +234,67 @@ export {
 };
 
 // =============== DaniJla-64 commit ===============
+
+// async function initialHomePage() {
+//   currentCategory = 'all';
+//   page = 1;
+//   try {
+//     const categoriesArr = await getFurnitureCategories();
+//     renderFurnitureCategories(categoriesArr);
+//     // ====== firstActiveCategory ===========
+//     const firstActiveCategory = refs.furnitureCategoriesList.querySelector(
+//       '.category-item[data-category-id="all"]'
+//     );
+//     firstActiveCategory.classList.add('category-item-active');
+//     // ====== firstActiveCategory ===========
+//     const { furnitures, totalItems, limit } = await getFurnitureFurnitures();
+//     renderFurnitureFurnitures(furnitures);
+
+//     furnitureHideLoader();
+//     if (limit * page < totalItems) {
+//       furnitureShowLoadMoreBtn();
+//     }
+
+//     const feedbacksArr = await getFeedbackFeedbacks();
+//     renderFeedbackFeedbacks(feedbacksArr);
+//     initialSwiper();
+
+//     initialAccordion();
+//   } catch (error) {
+//     console.log(error.message);
+//   } finally {
+//     furnitureHideLoader();
+//   }
+// }
+
+// async function handlerFurnitureByCategory(event) {
+//   const clickedCategoryItem = event.target.closest('.category-item');
+//   if (!clickedCategoryItem) {
+//     return;
+//   }
+//   // ==== active category =====
+//   document
+//     .querySelectorAll('.category-item-active')
+//     .forEach(item => item.classList.remove('category-item-active'));
+//   clickedCategoryItem.classList.add('category-item-active');
+//   // ==== active category =====
+//   page = 1;
+//   refs.furnitureFurnituresList.innerHTML = '';
+//   furnitureHideLoadMoreBtn();
+//   furnitureShowLoader();
+//   try {
+//     currentCategory = clickedCategoryItem.dataset.categoryId;
+//     const { furnitures, totalItems, limit } =
+//       currentCategory === 'all'
+//         ? await getFurnitureFurnitures(page)
+//         : await getFurnitureByCategory(page, currentCategory);
+//     renderFurnitureFurnitures(furnitures);
+//     if (limit * page < totalItems) {
+//       furnitureShowLoadMoreBtn();
+//     }
+//   } catch (error) {
+//     console.log(error.message);
+//   } finally {
+//     furnitureHideLoader();
+//   }
+// }

@@ -58,104 +58,104 @@
 .category-item[data-category-type='all-furniture'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/all-furniture@2x.png') 2x,
-      url('../img/categories/all-furniture@1x.png') 1x
+      url('../img/categories/all-furniture@2x.webp') 2x,
+      url('../img/categories/all-furniture@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='upholstered-furniture'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/upholstered-furniture@2x.png') 2x,
-      url('../img/categories/upholstered-furniture@1x.png') 1x
+      url('../img/categories/upholstered-furniture@2x.webp') 2x,
+      url('../img/categories/upholstered-furniture@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='wardrobes-storage'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/wardrobes-storage@2x.png') 2x,
-      url('../img/categories/wardrobes-storage@1x.png') 1x
+      url('../img/categories/wardrobes-storage@2x.webp') 2x,
+      url('../img/categories/wardrobes-storage@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='beds-mattresses'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/beds-mattresses@2x.png') 2x,
-      url('../img/categories/beds-mattresses@1x.png') 1x
+      url('../img/categories/beds-mattresses@2x.webp') 2x,
+      url('../img/categories/beds-mattresses@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='tables'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/tables@2x.png') 2x,
-      url('../img/categories/tables@1x.png') 1x
+      url('../img/categories/tables@2x.webp') 2x,
+      url('../img/categories/tables@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='chairs-stools'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/chairs-stools@2x.png') 2x,
-      url('../img/categories/chairs-stools@1x.png') 1x
+      url('../img/categories/chairs-stools@2x.webp') 2x,
+      url('../img/categories/chairs-stools@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='kitchens'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/kitchens@2x.png') 2x,
-      url('../img/categories/kitchens@1x.png') 1x
+      url('../img/categories/kitchens@2x.webp') 2x,
+      url('../img/categories/kitchens@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='kids-furniture'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/kids-furniture@2x.png') 2x,
-      url('../img/categories/kids-furniture@1x.png') 1x
+      url('../img/categories/kids-furniture@2x.webp') 2x,
+      url('../img/categories/kids-furniture@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='office-furniture'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/office-furniture@2x.png') 2x,
-      url('../img/categories/office-furniture@1x.png') 1x
+      url('../img/categories/office-furniture@2x.webp') 2x,
+      url('../img/categories/office-furniture@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='hallway-furniture'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/hallway-furniture@2x.png') 2x,
-      url('../img/categories/hallway-furniture@1x.png') 1x
+      url('../img/categories/hallway-furniture@2x.webp') 2x,
+      url('../img/categories/hallway-furniture@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='bathroom-furniture'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/bathroom-furniture@2x.png') 2x,
-      url('../img/categories/bathroom-furniture@1x.png') 1x
+      url('../img/categories/bathroom-furniture@2x.webp') 2x,
+      url('../img/categories/bathroom-furniture@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='outdoor-garden-furniture'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/outdoor-garden-furniture@2x.png') 2x,
-      url('../img/categories/outdoor-garden-furniture@1x.png') 1x
+      url('../img/categories/outdoor-garden-furniture@2x.webp') 2x,
+      url('../img/categories/outdoor-garden-furniture@1x.webp') 1x
     );
 }
 
 .category-item[data-category-type='decor-accessories'] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     image-set(
-      url('../img/categories/decor-accessories@2x.png') 2x,
-      url('../img/categories/decor-accessories@1x.png') 1x
+      url('../img/categories/decor-accessories@2x.webp') 2x,
+      url('../img/categories/decor-accessories@1x.webp') 1x
     );
 }
 
@@ -187,6 +187,7 @@
   border-radius: 8px 8px 24px 24px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 16px;
   transition: box-shadow 250ms ease-in-out;
 }
