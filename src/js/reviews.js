@@ -50,7 +50,7 @@ function renderFeedbacks(reviews) {
       starOff: star,
       starOn: starOn,
       starHalf: starHalf,
-      round: { down: 0.29, full: 0.5, up: 0.8 },
+      round: { down: 0.29, full: 0.7, up: 0.8 },
     });
     raty.init();
   });
