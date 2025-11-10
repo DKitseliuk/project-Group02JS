@@ -38,7 +38,7 @@ function renderFurnitureFurnitures(furnitures) {
         .join('');
 
       return `
-            <li class="furniture-item" data-category-id="${id}">
+            <li class="furniture-item" data-furniture-id="${id}">
                 <img class="furniture-image" src="${images[0]}" alt="${name}"/>
                 <div class="furniture-info">
                     <h3 class="furniture-name">${name}</h3>
@@ -102,6 +102,71 @@ function renderFeedbackFeedbacks(feedbacks) {
 }
 //#endregion ===== Feedback =====
 
+//#region ===== Furniture details modal =====
+
+function renderFurnitureDetailsModal(furnitureDetails) { 
+  const {
+    name,
+    category: { name: categoryName },
+    price,
+    rate,
+    color,
+    description,
+    sizes,
+    images
+  } = furnitureDetails;
+  
+  const imagesMarkup = images
+    .map(image => {
+      return `
+        <li class="furniture-modal-img-item">
+          <img
+            class="furniture-modal-img"
+            src="${image}"
+            alt="${description}"
+            loading="lazy"
+          />
+      </li>
+      `;
+    })
+    .join('');
+  
+  const colorsMarkup = color
+    .map(colorItem => {
+      return `
+        <li
+            class="furniture-modal-color"
+            style="background-color: ${colorItem}"
+            data-color="${colorItem}"
+          >
+        </li>
+      `;
+    })
+    .join('');
+  
+  const infoMarkup = `
+    <h3 class="furniture-modal-name">${name}</h3>
+    <p class="furniture-modal-category">${categoryName}</p>
+    <p class="furniture-modal-price">${price} грн</p>
+    <div class="furniture-modal-rate">${rate}</div>
+    <p class="furniture-modal-subtitle">Колір</p>
+    <ul class="furniture-modal-colors">${colorsMarkup}</ul>
+    <p class="furniture-modal-description">${description}</p>
+    <p class="furniture-modal-size">Розміри: ${sizes}</p>
+  `
+  refs.furnitureDetailsImages.innerHTML = imagesMarkup;
+  refs.furnitureDetailsInfo.innerHTML = infoMarkup;
+}
+
+function furnitureDetailsToggleCurruntColor(colorEl) {
+  document.querySelectorAll('.furniture-modal-color')
+    .forEach(item => item.classList.remove('current-color'));  
+  colorEl.classList.add('current-color');
+}
+
+//#endregion ===== Furniture details modal =====
+
+
 //#region ===== Order modal =====
 function showOrderLoader() {
   refs.orderLoader.classList.remove('is-hidden');
@@ -129,6 +194,8 @@ export {
   furnitureHideLoadMoreBtn,
   furnitureShowLoader,
   furnitureHideLoader,
+  renderFurnitureDetailsModal,
+  furnitureDetailsToggleCurruntColor,
   renderFeedbackFeedbacks,
   showOrderLoader,
   hideOrderLoader,

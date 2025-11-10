@@ -1,8 +1,8 @@
 /*#region ===== Modal furniture details styles ===== */
 
 .furniture-modal {
-  width: 335px;
-  max-height: 90dvh;
+  width: 0;
+  max-height: 0;
   overflow-y: auto;
   padding: 64px 20px 44px;
   display: flex;
@@ -11,6 +11,13 @@
   border-radius: 8px;
   background-color: #ffffff;
   position: relative;
+  transition: width 0.5s ease-in-out, max-height 0.5s ease-in-out;
+}
+
+.backdrop.is-open .furniture-modal {
+  width: 335px;
+  max-height: 90dvh;
+  transition: width 0.5s ease-in-out, max-height 0.5s ease-in-out;
 }
 
 .furniture-modal-img-list {
@@ -81,6 +88,7 @@
   width: 32px;
   height: 32px;
   border-radius: 100%;
+  border: 1px solid #838584;
   transition: border 350ms ease-in-out;
 }
 
@@ -116,8 +124,11 @@
 
 @media screen and (min-width: 768px) {
   .furniture-modal {
-    width: 704px;
     padding: 64px 32px 32px;
+  }
+
+  .backdrop.is-open .furniture-modal {
+    width: 704px;
   }
 
   .furniture-modal-description {
@@ -130,9 +141,12 @@
 
 @media screen and (min-width: 1440px) {
   .furniture-modal {
-    width: 1090px;
     padding: 64px;
     flex-direction: row;
+  }
+
+  .backdrop.is-open .furniture-modal {
+    width: 1090px;
   }
 
   .furniture-modal-img-list {
