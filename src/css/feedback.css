@@ -95,20 +95,25 @@
 .btn-prev:hover,
 .btn-next:hover,
 .btn-prev:focus,
-.btn-next:focus {
+.btn-next:focus,
+.swiper-btn:hover,
+.swiper-btn:focus {
   background-color: #975052;
 }
 .btn-next:active,
-.btn-prev:active {
+.btn-prev:active,
+.swiper-btn:active {
   background-color: #6b0609;
 }
 .btn-next:disabled,
-.btn-prev:disabled {
+.btn-prev:disabled,
+.swiper-btn:disabled {
   opacity: 0.3;
   pointer-events: none;
 }
 
-.navigation-icon {
+.navigation-icon,
+.arr-icon {
   fill: #080c09;
   transition: fill 0.35s ease-in-out;
 }
@@ -118,12 +123,16 @@
 .btn-next:active .navigation-icon,
 .btn-prev:hover .navigation-icon,
 .btn-prev:focus .navigation-icon,
-.btn-prev:active .navigation-icon {
+.btn-prev:active .navigation-icon,
+.swiper-btn:hover .arr-icon,
+.swiper-btn:focus .arr-icon,
+.swiper-btn:active .arr-icon {
   fill: #f2f2f2;
 }
 
 .btn-prev:disabled .navigation-icon,
-.btn-next:disabled .navigation-icon {
+.btn-next:disabled .navigation-icon,
+.swiper-btn:disabled .arr-icon {
   pointer-events: none;
 }
 

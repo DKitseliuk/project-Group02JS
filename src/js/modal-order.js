@@ -90,75 +90,10 @@ refs.orderForm.querySelectorAll('.form-input').forEach(input => {
   input.addEventListener('input', handleInputEvent);
 });
 
-async function handleOrderFormSubmit(e) {
-  e.preventDefault();
-
-  const submitBtn = refs.orderForm.querySelector('button[type="submit"]');
-  const loader = refs.orderForm.querySelector('.loader');
-
-  // Блокуємо кнопку і показуємо лоадер
-  submitBtn.disabled = true;
-  submitBtn.style.display = 'none';
-  loader.style.display = 'block';
-
-  // Тимчасово прибираємо закриття модалки
-  refs.orderCloseBtn.removeEventListener('click', handlerOrderCloseBtn);
-  refs.orderBackdrop.removeEventListener('click', handlerOrderBackdropClick);
-
-  if (validateForm(refs.orderForm)) {
-    const formData = {
-      name: refs.orderForm.querySelector('#user-name').value.trim(),
-      phone: refs.orderForm.querySelector('#user-phone').value.trim(),
-      comment: refs.orderForm.querySelector('#user-comment').value.trim(),
-    };
-
-    try {
-      const response = await axios.post(
-        'https://furniture-store-v2.b.goit.study/api/orders',
-        formData,
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-
-      // Успішне пуш-повідомлення iziToast
-      iziToast.success({
-        title: 'Успіх!',
-        message: `Замовлення №${response.data.orderNum} успішно створено.`,
-        position: 'topRight',
-      });
-
-      clearForm();
-      closeOrderModal();
-    } catch (error) {
-      const message = error.response?.data?.message || 'Сталася помилка при відправці. Спробуйте ще раз.';
-
-      // Пуш-повідомлення помилки
-      iziToast.error({
-        title: 'Помилка',
-        message,
-        position: 'topRight',
-      });
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.style.display = 'block';
-      loader.style.display = 'none';
-
-      refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
-      refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
-    }
-  } else {
-    submitBtn.disabled = false;
-    submitBtn.style.display = 'block';
-    loader.style.display = 'none';
-
-    refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
-    refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
-  }
-}
 
 export { 
   openOrderModal,
   closeOrderModal,
   validateForm,
-  clearForm,
-  handleOrderFormSubmit
+  clearForm  
 };

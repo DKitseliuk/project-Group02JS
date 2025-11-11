@@ -1,5 +1,5 @@
 import refs from './refs';
-import { initialAccordion, initialSwiper } from './helpers';
+import { initialAccordion, initialSwiperFeedback, initialSwiperPopular } from './helpers';
 import { openBurgerMenu, closeBurgerMenu } from './burger-menu';
 import {
   getFeedbackFeedbacks,
@@ -8,6 +8,7 @@ import {
   getFurnitureByCategory,
   sendOrder,
   getFurnitureById,
+  getPopularFurnitures,
 } from './furniture-api';
 import {
   furnitureDetailsToggleCurruntColor,
@@ -21,6 +22,7 @@ import {
   renderFurnitureCategories,
   renderFurnitureDetailsModal,
   renderFurnitureFurnitures,
+  renderPopularFurnitures,
   showOrderLoader,
 } from './render-function';
 import {
@@ -49,16 +51,20 @@ async function initialHomePage() {
     furnitureToggleActiveCategory(firstActiveCategory);
     
     const { furnitures, totalItems, limit } = await getFurnitureFurnitures();
-    renderFurnitureFurnitures(furnitures);
+    renderFurnitureFurnitures(furnitures);    
 
     furnitureHideLoader();
     if (limit * page < totalItems) {
       furnitureShowLoadMoreBtn();
     }
 
+    const { furnitures: popularFurnitures } = await getPopularFurnitures();
+    renderPopularFurnitures(popularFurnitures);
+    initialSwiperPopular();
+
     const feedbacksArr = await getFeedbackFeedbacks();
     renderFeedbackFeedbacks(feedbacksArr);
-    initialSwiper();
+    initialSwiperFeedback();
 
     initialAccordion();
   } catch (error) {
@@ -159,7 +165,7 @@ async function handlerFurnitureDetailsOpenBtn(event) {
     renderFurnitureDetailsModal(furnitureDetails);
     
     currentColor = furnitureDetails.color[0];
-    furnitureDetailsToggleCurruntColor(document.querySelector('.furniture-modal-color'));
+    furnitureDetailsToggleCurruntColor(document.querySelector('.furniture-modal-color'));    
 
   } catch (error) {
     console.log(error.message);    
@@ -184,7 +190,7 @@ function handlerFurnitureDetailsBackdropEscape(event) {
   }
 }
 
-function handlerFurnitureDetailsOrderBtn(event) {
+function handlerFurnitureDetailsOrderBtn() {
   closeFurnitureDetailsModal();
   openOrderModal();
 }
@@ -193,7 +199,7 @@ function handlerFurnitureDetailsSelectColor(event) {
   if (event.target.nodeName !== "LI") {
     return;
   }
-  currentColor = event.target.dataset.color;
+  currentColor = event.target.dataset.color;  
   furnitureDetailsToggleCurruntColor(event.target);
 }
 
@@ -218,55 +224,72 @@ function handlerOrderBackdropEscape(event) {
   }
 }
 
-async function handlerOrderSubmitForm(event) {
-  event.preventDefault();
+async function handlerOrderSubmitForm(e) {
+    e.preventDefault();
 
-  if (!validateForm(refs.orderForm)) return;
+  const submitBtn = refs.orderForm.querySelector('button[type="submit"]');
+  const loader = refs.orderForm.querySelector('.loader');
 
-  showOrderLoader();
+  // Блокуємо кнопку і показуємо лоадер
+  submitBtn.disabled = true;
+  submitBtn.style.display = 'none';
+  loader.style.display = 'block';
 
-  const name = refs.orderForm.elements['user-name'].value.trim();
-  const phone = refs.orderForm.elements['user-phone'].value
-    .trim()
-    .replace(/\D/g, '');
-  const comment =
-    refs.orderForm.elements['user-comment'].value.trim() || 'Немає коментаря';
+  // Тимчасово прибираємо закриття модалки
+  refs.orderCloseBtn.removeEventListener('click', handlerOrderCloseBtn);
+  refs.orderBackdrop.removeEventListener('click', handlerOrderBackdropClick);
 
-  const orderData = {
-    name,
-    phone,
-    modelId: currentModelId || '682f9bbf8acbdf505592ac36',
-    color: currentColor || '#1212ca',
-    comment,
-  };
-
-  try {
-    const response = await sendOrder(orderData);
-
-    console.log('Вся відповідь сервера:', response);
-    console.log('Тільки data:', response.data);
-
-    iziToast.success({
-      title: 'Успіх!',
-      message: `Замовлення №${response.data.orderNum} успішно створено.`,
-      position: 'topRight',
-    });
-
-    clearForm();
-    closeOrderModal();
-  } catch (error) {
-    let message = 'Сталася невідома помилка. Спробуйте ще раз.';
-    if (error.response && error.response.data && error.response.data.message) {
-      message = error.response.data.message;
+  if (validateForm(refs.orderForm)) {
+    const formData = refs.orderForm.querySelector('#user-comment').value.trim() ? {
+      modelId: currentModelId,
+      color: currentColor,
+      name: refs.orderForm.querySelector('#user-name').value.trim(),
+      phone: refs.orderForm.querySelector('#user-phone').value.trim(),
+      comment: refs.orderForm.querySelector('#user-comment').value.trim(),
+    } : {
+      modelId: currentModelId,
+      color: currentColor,
+      name: refs.orderForm.querySelector('#user-name').value.trim(),
+      phone: refs.orderForm.querySelector('#user-phone').value.trim(),     
     }
+    ;
 
-    iziToast.error({
-      title: 'Помилка',
-      message,
-      position: 'topRight',
-    });
-  } finally {
-    hideOrderLoader();
+    try {
+      const response = await sendOrder(formData);
+
+      // Успішне пуш-повідомлення iziToast
+      iziToast.success({
+        title: 'Успіх!',
+        message: `Замовлення №${response.data.orderNum} успішно створено.`,
+        position: 'topRight',
+      });
+
+      clearForm();
+      closeOrderModal();
+    } catch (error) {
+      const message = error.response?.data?.message || 'Сталася помилка при відправці. Спробуйте ще раз.';
+
+      // Пуш-повідомлення помилки
+      iziToast.error({
+        title: 'Помилка',
+        message,
+        position: 'topRight',
+      });
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.style.display = 'block';
+      loader.style.display = 'none';
+
+      refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
+      refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
+    }
+  } else {
+    submitBtn.disabled = false;
+    submitBtn.style.display = 'block';
+    loader.style.display = 'none';
+
+    refs.orderCloseBtn.addEventListener('click', handlerOrderCloseBtn);
+    refs.orderBackdrop.addEventListener('click', handlerOrderBackdropClick);
   }
 }
 //#endregion ===== Order modal handlers =====

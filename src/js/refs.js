@@ -3,13 +3,16 @@ const refs = {
   menuOpenBtn: document.querySelector('.header-burger-btn'),
   menuCloseBtn: document.querySelector('.burger-menu-close'),
   menuBackdrop: document.querySelector('.burger-menu'),
-  menuLinksList: document.querySelector('.content-list'),
+  menuLinksList: document.querySelector('.burger-nav-list'),
 
   //Furniture elements
   furnitureCategoriesList: document.querySelector('.category-list'),
   furnitureFurnituresList: document.querySelector('.furniture-list'),
   furnitureLoadMoreBtn: document.querySelector('.load-more-button'),
   furnitureLoader: document.querySelector('div.container-furniture .loader'),
+
+  //Popular furniture elements
+  popularFurnituresList: document.querySelector('.popular-list'),
 
   // Feedback elements
   feedbackFeedbacksList: document.querySelector('.feedback-swiper-wrapper'),
