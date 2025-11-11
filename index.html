@@ -23,9 +23,9 @@
     />
     <title>Меблерія</title>
     <script type="module" crossorigin src="/project-Group02JS/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/project-Group02JS/assets/vendor-BU5mLPuU.js">
+    <link rel="modulepreload" crossorigin href="/project-Group02JS/assets/vendor-Ck-c9eC4.js">
     <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/vendor-BXjtEl4_.css">
-    <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-DBOGsAk4.css">
+    <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-CjQbjJTu.css">
   </head>
 
   <body>
@@ -82,9 +82,9 @@
         перетворять ваш простір. Наша продукція поєднує в собі елегантність та
         функціональність.
       </p>
-      <button href="#feedback" type="button" class="hero-button-feedback">
+      <a href="#feedback" type="button" class="hero-button-feedback">
         Що про нас думають
-      </button>
+      </a>
     </div>
   </div>
 </section>
@@ -95,9 +95,10 @@
     <p class="description-category">
       Знайдіть ідеальні рішення для вашого інтер'єру
     </p>
+    <p class="loader category-loader"></p>
     <ul class="list category-list"></ul>
-    <ul class="list furniture-list" id="furniture-list"></ul>
-    <p class="loader"></p>
+    <p class="loader furniture-loader"></p>
+    <ul class="list furniture-list"></ul>
     <button class="button load-more-button is-hidden" type="button">
       Показати ще
     </button>
@@ -119,15 +120,15 @@
       <picture class="about-picture">
         <source
           media="(min-width: 1440px)"
-          srcset="/project-Group02JS/assets/About-desktop@1x-whO1iEYp.webp, /project-Group02JS/assets/About-desktop@2x-CcMM8Bmz.webp"
+          srcset="/project-Group02JS/assets/About-desktop@2x-CcMM8Bmz.webp 2x, /project-Group02JS/assets/About-desktop@1x-whO1iEYp.webp 1x"
         />
         <source
           media="(min-width: 768px)"
-          srcset="/project-Group02JS/assets/About-tablet@1x-nKRFQtlI.webp, /project-Group02JS/assets/About-tablet@2x-CUS1mUtK.webp"
+          srcset="/project-Group02JS/assets/About-tablet@2x-CUS1mUtK.webp 2x, /project-Group02JS/assets/About-tablet@1x-nKRFQtlI.webp 1"
         />
         <img
           class="about-img"
-          srcset="/project-Group02JS/assets/About-mobile@1x-B4fR3Hkc.webp, /project-Group02JS/assets/About-mobile@2x-Bp6elhqP.webp"
+          srcset="/project-Group02JS/assets/About-mobile@2x-Bp6elhqP.webp 2x, /project-Group02JS/assets/About-mobile@1x-B4fR3Hkc.webp 1x"
           src="/project-Group02JS/assets/About-mobile@1x-B4fR3Hkc.webp"
           alt="Company of people"
         />
@@ -140,6 +141,8 @@
   <div class="container">
     <div class="popular-wrapper">
       <h2 class="popular-title">Популярні товари</h2>
+
+      <p class="loader popular-furniture-loader is-hidden"></p>
 
       <div class="popular-viewport swiper">
         <ul class="popular-list swiper-wrapper"></ul>
@@ -173,7 +176,7 @@
 
       <section class="section section-faq" id="faq">
   <div class="container">
-    <h2 id="faq" class="section-faq-title">Часті питання</h2>
+    <h2 class="section-faq-title">Часті питання</h2>
     <ul class="accordion-list">
       <li class="accordion-item">
         <h3 class="accordion-title">
@@ -258,6 +261,7 @@
     </ul>
   </div>
 </section>
+
       <section id="feedback" class="section feedback-section">
   <div class="container">
     <div class="title-container">
@@ -267,9 +271,12 @@
       </p>
     </div>
 
-    <div class="swiper">
+    <div class="feedback-swiper swiper">
       <ul class="feedback-swiper-wrapper swiper-wrapper"></ul>
     </div>
+
+    <p class="loader feedback-loader is-hidden"></p>
+
     <div class="nav">
       <div class="paginator"></div>
       <div class="swiper-navigation">
@@ -305,85 +312,102 @@
     <footer class="footer">
   <div class="container">
     <div class="footer__block-wrapper">
-      
       <div class="footer__logo">
         <a class="logo logo-footer" href="./index.html" aria-label="logo">
-          <svg class="footer__logo-item" width="220" height="48" aria-hidden="true">
+          <svg
+            class="footer__logo-item"
+            width="220"
+            height="48"
+            aria-hidden="true"
+          >
             <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#logo"></use>
           </svg>
         </a>
-         
       </div>
       <p class="footer__text-desktop">
-          &copy; 2025 Меблерія. Всі права захищені
-        </p>
-        <nav class="footer-nav">
-          <ul class="footer-nav-list">
-            <li class="footer-nav-list-item">
-              <a href="#furniture-list" class="footer-nav-list-item-link current"
-                >Наші меблі</a
-              >
-            </li>
-            <li class="footer-nav-list-item">
-              <a href="#about-us" class="footer-nav-list-item-link">Про нас</a>
-            </li>
-            <li class="footer-nav-list-item">
-              <a href="#faq" class="footer-nav-list-item-link"
-                >Часті питання</a
-              >
-            </li>
-            <li class="footer-nav-list-item">
-              <a href="#feedback" class="footer-nav-list-item-link">Відгуки</a>
-            </li>
-          </ul>
-        </nav>
-       
-          <ul class="footer__social">
-             <li>
-              <a
-                class="footer-social__link"
-                href="https://www.youtube.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                 aria-label="Opens YouTube in a new tab"
-              >
-                <svg class="footer__icons" width="24" height="24" aria-hidden="true">
-                  <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#youtube"></use>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                class="footer-social__link"
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Opens Instagram in a new tab"
-              >
-                <svg class="footer__icons" width="24" height="24" aria-hidden="true">
-                  <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#instagram"></use>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                class="footer-social__link"
-                href="https://www.facebook.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Opens Facebook in a new tab"
-              >
-                <svg class="footer__icons" width="24" height="24" aria-hidden="true">
-                  <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#facebook"></use>
-                </svg>
-              </a>
-            </li>
-           
-          </ul>
-        <p class="footer__text">
-          &copy; 2025 Меблерія. Всі права захищені
-        </p>
-      </div>
+        &copy; 2025 Меблерія. Всі права захищені
+      </p>
+      <nav class="footer-nav">
+        <ul class="footer-nav-list">
+          <li class="footer-nav-list-item">
+            <a href="#furniture-list" class="footer-nav-list-item-link current"
+              >Наші меблі</a
+            >
+          </li>
+          <li class="footer-nav-list-item">
+            <a href="#about-us" class="footer-nav-list-item-link">Про нас</a>
+          </li>
+          <li class="footer-nav-list-item">
+            <a href="#pupular-furniture" class="footer-nav-list-item-link"
+              >Популярне</a
+            >
+          </li>
+          <li class="footer-nav-list-item">
+            <a href="#faq" class="footer-nav-list-item-link">Часті питання</a>
+          </li>
+          <li class="footer-nav-list-item">
+            <a href="#feedback" class="footer-nav-list-item-link">Відгуки</a>
+          </li>
+        </ul>
+      </nav>
+
+      <ul class="footer__social">
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.youtube.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Opens YouTube in a new tab"
+          >
+            <svg
+              class="footer__icons"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#youtube"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Opens Instagram in a new tab"
+          >
+            <svg
+              class="footer__icons"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#instagram"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Opens Facebook in a new tab"
+          >
+            <svg
+              class="footer__icons"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/project-Group02JS/assets/icons-DGgfRMn1.svg#facebook"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+      <p class="footer__text">&copy; 2025 Меблерія. Всі права захищені</p>
     </div>
   </div>
 </footer>
@@ -479,6 +503,9 @@
         Перейти до замовлення
       </button>
     </div>
+  </div>
+  <div class="furniture-modal-loader-box">
+    <div class="loader"></div>
   </div>
 </div>
 
