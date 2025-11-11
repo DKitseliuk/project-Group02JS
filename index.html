@@ -25,7 +25,7 @@
     <script type="module" crossorigin src="/project-Group02JS/index.js"></script>
     <link rel="modulepreload" crossorigin href="/project-Group02JS/assets/vendor-BU5mLPuU.js">
     <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/vendor-BXjtEl4_.css">
-    <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-C0F6RL6T.css">
+    <link rel="stylesheet" crossorigin href="/project-Group02JS/assets/index-DBOGsAk4.css">
   </head>
 
   <body>
@@ -96,7 +96,7 @@
       Знайдіть ідеальні рішення для вашого інтер'єру
     </p>
     <ul class="list category-list"></ul>
-    <ul class="list furniture-list"></ul>
+    <ul class="list furniture-list" id="furniture-list"></ul>
     <p class="loader"></p>
     <button class="button load-more-button is-hidden" type="button">
       Показати ще
@@ -147,13 +147,21 @@
         <div class="popular-pagination swiper-pagination"></div>
 
         <div class="popular-controls">
-          <button class="swiper-btn popular-prev" type="button">
-            <svg width="20" height="20">
+          <button
+            class="swiper-btn popular-prev"
+            type="button"
+            aria-label="Go to previous pupular furniture"
+          >
+            <svg width="24" height="24" aria-hidden="true">
               <use class="arr-icon" href="/project-Group02JS/assets/icons-DGgfRMn1.svg#arrow-left-alt"></use>
             </svg>
           </button>
-          <button class="swiper-btn popular-next" type="button">
-            <svg width="20" height="20">
+          <button
+            class="swiper-btn popular-next"
+            type="button"
+            aria-label="Go to next pupular furniture"
+          >
+            <svg width="24" height="24" aria-hidden="true">
               <use class="arr-icon" href="/project-Group02JS/assets/icons-DGgfRMn1.svg#arrow-right-alt"></use>
             </svg>
           </button>
