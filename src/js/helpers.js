@@ -1,7 +1,7 @@
 import Accordion from 'accordion-js';
 //import "accordion-js/dist/accordion.min.css";
 import Swiper from 'swiper';
-import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
+import { Navigation, Pagination, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -21,8 +21,8 @@ function initialAccordion() {
 }
 
 function initialSwiperFeedback() {
-  new Swiper('.swiper', {
-    modules: [Navigation, Pagination, Keyboard, Mousewheel],
+  new Swiper('.feedback-swiper', {
+    modules: [Navigation, Pagination, Keyboard],
     speed: 350,
     slidesPerGroup: 1,
     grabCursor: true,
@@ -59,10 +59,12 @@ function initialSwiperFeedback() {
 
 function initialSwiperPopular() {
     const swiper = new Swiper('.popular-viewport', {
-    modules: [Navigation, Pagination],
+      modules: [Navigation, Pagination, Keyboard],
+      speed: 350,
     slidesPerView: 1,
     spaceBetween: 24,
     slidesPerGroup: 1,
+    grabCursor: true,
     watchOverflow: true,
     centeredSlides: false,
 
@@ -75,6 +77,10 @@ function initialSwiperPopular() {
       nextEl: '.popular-next',
       prevEl: '.popular-prev',
     },
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+      },    
     breakpoints: {
       768:  { slidesPerView: 2 },
       1440: { slidesPerView: 4 },

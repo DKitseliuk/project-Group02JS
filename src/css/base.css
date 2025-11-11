@@ -20,4 +20,8 @@ body {
   overflow-x: hidden;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 /*#endregion ===== Base styles ===== */
