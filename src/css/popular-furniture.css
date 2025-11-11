@@ -3,14 +3,14 @@
   padding: 48px 0;
 }
 
-.popular-viewport .swiper-wrapper { 
-  align-items: stretch; 
-} 
+.popular-viewport .swiper-wrapper {
+  align-items: stretch;
+}
 
-.popular-viewport .swiper-slide {  
-  display: flex;            
-  flex-direction: column;   
-  height: auto;             
+.popular-viewport .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  height: auto;
 }
 
 .popular-title {
@@ -26,13 +26,13 @@
 .popular-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin-bottom: 48px;
 }
 
 .furniture-data-wrapper {
-  display: flex; 
-  flex-direction: column; 
-  height: 100% 
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .furniture-visual {
@@ -57,7 +57,7 @@
   gap: 8px;
 }
 
-.furniture-name {    
+.furniture-name {
   font-size: 18px;
   font-weight: 600;
   line-height: 160%;
@@ -117,32 +117,17 @@
 
 .swiper-btn {
   align-items: flex-end;
-
-  margin-top: 48px;
-
   border: 1px solid rgba(8, 12, 9, 0.15);
   border-radius: 100px;
   padding: 12px;
   width: 48px;
   height: 48px;
   background-color: #f2f2f2;
-}
-
-
-.swiper-btn:hover, .arr-icon:hover,
-.swiper-btn:focus .arr-icon:focus {
-  background-color: #975052;
-  fill: #f2f2f2;
-}
-
-.swiper-btn:active {
-  background-color: #6b0609; 
-  fill: #f2f2f2;
-}
-
-.swiper-btn[disabled] {
-  opacity: 0.4;
-  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  transition: background-color 0.35s ease-in-out, opacity 0.35s ease-in-out;
 }
 
 .popular-viewport .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
@@ -158,19 +143,19 @@
   opacity: 1;
 }
 
-@media (min-width: 768px) {
-
+@media screen and (min-width: 768px) {
   .popular-viewport
     .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
     overflow: visible !important;
   }
 }
 
-@media (min-width: 768px) {
-
+@media screen and (min-width: 1440px) {
+  .pupular-furniture-section {
+    padding: 80px 0;
+  }
   .popular-title {
     font-size: 48px;
-}
-
+  }
 }
 /*#endregion ===== Popular furniture styles ===== */

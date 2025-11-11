@@ -20,7 +20,7 @@ function initialAccordion() {
   new Accordion('.accordion-list', params);
 }
 
-function initialSwiper() {
+function initialSwiperFeedback() {
   new Swiper('.swiper', {
     modules: [Navigation, Pagination, Keyboard, Mousewheel],
     speed: 350,
@@ -57,4 +57,45 @@ function initialSwiper() {
   });
 }
 
-export { initialAccordion, initialSwiper };
+function initialSwiperPopular() {
+    const swiper = new Swiper('.popular-viewport', {
+    modules: [Navigation, Pagination],
+    slidesPerView: 1,
+    spaceBetween: 24,
+    slidesPerGroup: 1,
+    watchOverflow: true,
+    centeredSlides: false,
+
+    pagination: {
+      el: '.popular-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    navigation: {
+      nextEl: '.popular-next',
+      prevEl: '.popular-prev',
+    },
+    breakpoints: {
+      768:  { slidesPerView: 2 },
+      1440: { slidesPerView: 4 },
+    },
+    
+    slidesOffsetBefore: 0,
+    slidesOffsetAfter: 0,
+  });
+
+  
+  const prev = document.querySelector('.popular-prev');
+  const next = document.querySelector('.popular-next');
+  
+  const toggleArrows = () => {
+    prev.toggleAttribute('disabled', swiper.isBeginning);
+    next.toggleAttribute('disabled', swiper.isEnd);
+  };
+  swiper.on('afterInit slideChange reachBeginning reachEnd fromEdge', toggleArrows);
+  toggleArrows();
+}
+
+
+
+export { initialAccordion, initialSwiperFeedback, initialSwiperPopular };

@@ -56,8 +56,7 @@ function renderFurnitureFurnitures(furnitures) {
             `;
     })
     .join('');
-
-  refs.furnitureFurnituresList.insertAdjacentHTML('beforeend', listMarkupArr);
+  refs.furnitureFurnituresList.insertAdjacentHTML('beforeend', listMarkupArr);   
 }
 
 function furnitureShowLoadMoreBtn() {
@@ -83,6 +82,38 @@ function furnitureToggleActiveCategory(categoryEl) {
 }
 
 //#endregion ===== Furniture =====
+
+//#region ===== Popular furniture =====
+async function renderPopularFurnitures(furnitures) {  
+    const markup = furnitures
+      .map(item => {
+        const { _id, name, images, price, color } = item;
+        const img = images[0];
+        return `
+          <li class="furniture-item swiper-slide" data-furniture-id="${_id}">
+            <div class="furniture-data-wrapper">
+              <div class="furniture-visual">
+                <img src="${img}" alt="${name}" width="310" height="257">
+              </div>
+              <div class="furniture-info">
+                <h3 class="furniture-name">${name}</h3>
+                <ul class="color-list">
+                  ${color.map(col => `<li class="color-dot" style="background-color:${col}"></li>`).join('')}
+                </ul>
+                <p class="furniture-price">${price} грн</p>
+              </div>
+              <button class="furniture-btn" type="button">Детальніше</button>
+            </div>            
+          </li>
+        `;
+      })
+      .join('');
+
+    refs.popularFurnituresList.insertAdjacentHTML('beforeend', markup);  
+}
+
+
+//#endregion ===== Popular furniture =====
 
 //#region ===== Feedback =====
 function renderFeedbackFeedbacks(feedbacks) {
@@ -219,4 +250,5 @@ export {
   showOrderLoader,
   hideOrderLoader,
   showError,
+  renderPopularFurnitures,
 };

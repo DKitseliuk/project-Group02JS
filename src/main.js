@@ -4,10 +4,9 @@ import './js/modal.js';
 
 document.addEventListener("DOMContentLoaded", initialHomePage);
 
-// 
+// Listeners
 refs.menuOpenBtn.addEventListener('click', handlerMenuOpenBtn);
 refs.furnitureCategoriesList.addEventListener('click', handlerFurnitureByCategory);
 refs.furnitureLoadMoreBtn.addEventListener('click', handlerFurnitureLoadMoreBtn);
 refs.furnitureFurnituresList.addEventListener('click', handlerFurnitureDetailsOpenBtn);
-
-import './js/popular-furniture.js';
+refs.popularFurnituresList.addEventListener('click', handlerFurnitureDetailsOpenBtn);
