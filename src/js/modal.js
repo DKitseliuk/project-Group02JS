@@ -3,9 +3,14 @@ import refs from "./refs";
 
 
 function openFurnitureDetailsModal() {
-  refs.furnitureDetailsBackdrop.classList.add('is-open');
-  refs.furnitureDetailsModal.scrollTop = 0;
+  refs.furnitureDetailsBackdrop.classList.add('is-open');  
   document.body.classList.add('no-scroll');
+  refs.furnitureDetailsImages.innerHTML = '';
+  refs.furnitureDetailsInfo.innerHTML = '';
+}
+
+
+function furnitureDetailsModalAddListeners() {
   document.addEventListener('keydown', handlerFurnitureDetailsBackdropEscape);
   refs.furnitureDetailsCloseBtn.addEventListener('click', handlerFurnitureDetailsCloseBtn);
   refs.furnitureDetailsBackdrop.addEventListener('click', handlerFurnitureDetailsBackdropClick);
@@ -13,8 +18,8 @@ function openFurnitureDetailsModal() {
 
   const colorsList = document.querySelector('.furniture-modal-colors');
   colorsList.addEventListener('click', handlerFurnitureDetailsSelectColor);
-
 }
+
 
 function closeFurnitureDetailsModal() {
   refs.furnitureDetailsBackdrop.classList.remove('is-open');
@@ -25,11 +30,12 @@ function closeFurnitureDetailsModal() {
   refs.furnitureDetailsOrderBtn.removeEventListener('click', handlerFurnitureDetailsOrderBtn);
 
   const colorsList = document.querySelector('.furniture-modal-colors');
-  colorsList.removeEventListener('click', handlerFurnitureDetailsSelectColor);
+  if(colorsList) {colorsList.removeEventListener('click', handlerFurnitureDetailsSelectColor);}
 }
 
 
 export { 
   openFurnitureDetailsModal,
+  furnitureDetailsModalAddListeners,
   closeFurnitureDetailsModal,
 };

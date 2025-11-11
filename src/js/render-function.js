@@ -59,6 +59,14 @@ function renderFurnitureFurnitures(furnitures) {
   refs.furnitureFurnituresList.insertAdjacentHTML('beforeend', listMarkupArr);   
 }
 
+function categoryShowLoader() {
+  refs.categoryLoader.classList.remove("is-hidden");
+}
+
+function categoryHideLoader() {
+  refs.categoryLoader.classList.add("is-hidden");
+}
+
 function furnitureShowLoadMoreBtn() {
   refs.furnitureLoadMoreBtn.classList.remove('is-hidden');
 }
@@ -112,6 +120,13 @@ async function renderPopularFurnitures(furnitures) {
     refs.popularFurnituresList.insertAdjacentHTML('beforeend', markup);  
 }
 
+function popularFurnitureShowLoader() {
+  refs.popularFurnitureLoader.classList.remove("is-hidden");
+}
+
+function popularFurnitureHideLoader() {
+  refs.popularFurnitureLoader.classList.add("is-hidden");
+}
 
 //#endregion ===== Popular furniture =====
 
@@ -147,6 +162,14 @@ function renderRaty(element) {
       round: { down: 0.29, full: 0.79, up: 0.8 },
   });
   raty.init();
+}
+
+function feedbackShowLoader() {
+  refs.feedbackLoader.classList.remove("is-hidden");
+}
+
+function feedbackHideLoader() {
+  refs.feedbackLoader.classList.add("is-hidden");
 }
 
 //#endregion ===== Feedback =====
@@ -214,6 +237,25 @@ function furnitureDetailsToggleCurruntColor(colorEl) {
   colorEl.classList.add('current-color');
 }
 
+function furnitureDetailsShowLoader() {
+  refs.furnitureDetailsModalLoader.style.display = "flex";
+}
+
+function furnitureDetailsHideLoader() {
+  refs.furnitureDetailsModalLoader.style.display = "none";
+}
+
+
+function furnitureDetailsShowInfo() {
+  refs.furnitureDetailsModal.style.display = "flex";
+  refs.furnitureDetailsModal.scrollTop = 0;
+}
+
+function furnitureDetailsHideInfo() {
+  refs.furnitureDetailsModal.style.display = "none";
+}
+
+
 //#endregion ===== Furniture details modal =====
 
 
@@ -246,9 +288,19 @@ export {
   furnitureHideLoader,
   renderFurnitureDetailsModal,
   furnitureDetailsToggleCurruntColor,
+  furnitureDetailsShowLoader,
+  furnitureDetailsHideLoader,
+  furnitureDetailsShowInfo,
   renderFeedbackFeedbacks,
+  feedbackShowLoader,
+  feedbackHideLoader,
+  furnitureDetailsHideInfo,
   showOrderLoader,
   hideOrderLoader,
   showError,
   renderPopularFurnitures,
+  popularFurnitureShowLoader,
+  popularFurnitureHideLoader,
+  categoryShowLoader,
+  categoryHideLoader
 };

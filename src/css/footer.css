@@ -85,7 +85,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 80px;
+    gap: 60px;
   }
 
   .footer-nav-list {
@@ -98,7 +98,7 @@
 
   .footer__text-desktop {
     display: block;
-    padding: 0 32px;
+    padding: 0;
   }
 
   .footer-nav-list-item-link:hover,

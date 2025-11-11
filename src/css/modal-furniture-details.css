@@ -1,8 +1,8 @@
 /*#region ===== Modal furniture details styles ===== */
 
 .furniture-modal {
-  width: 0;
-  max-height: 0;
+  width: 335px;
+  max-height: 90dvh;
   overflow-y: auto;
   padding: 64px 20px 44px;
   display: flex;
@@ -14,10 +14,21 @@
   transition: width 0.5s ease-in-out, max-height 0.5s ease-in-out;
 }
 
-.backdrop.is-open .furniture-modal {
+.furniture-modal-loader-box {
+  width: 0px;
+  height: 0px;
+  border-radius: 8px;
+  padding: 64px 20px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.backdrop.is-open .furniture-modal-loader-box {
   width: 335px;
-  max-height: 90dvh;
-  transition: width 0.5s ease-in-out, max-height 0.5s ease-in-out;
+  height: 90dvh;
 }
 
 .furniture-modal-img-list {
@@ -124,9 +135,10 @@
 @media screen and (min-width: 768px) {
   .furniture-modal {
     padding: 64px 32px 32px;
+    width: 704px;
   }
 
-  .backdrop.is-open .furniture-modal {
+  .backdrop.is-open .furniture-modal-loader-box {
     width: 704px;
   }
 
@@ -140,15 +152,17 @@
 
 @media screen and (min-width: 1440px) {
   .furniture-modal {
+    width: 1090px;
     padding: 64px;
     flex-direction: row;
   }
 
-  .backdrop.is-open .furniture-modal {
+  .backdrop.is-open .furniture-modal-loader-box {
     width: 1090px;
   }
 
   .furniture-modal-img-list {
+    min-width: 580px;
     max-width: 580px;
   }
 

@@ -11,6 +11,14 @@ import {
   getPopularFurnitures,
 } from './furniture-api';
 import {
+  categoryHideLoader,
+  categoryShowLoader,
+  feedbackHideLoader,
+  feedbackShowLoader,
+  furnitureDetailsHideInfo,
+  furnitureDetailsHideLoader,
+  furnitureDetailsShowInfo,
+  furnitureDetailsShowLoader,
   furnitureDetailsToggleCurruntColor,
   furnitureHideLoader,
   furnitureHideLoadMoreBtn,
@@ -18,6 +26,8 @@ import {
   furnitureShowLoadMoreBtn,
   furnitureToggleActiveCategory,
   hideOrderLoader,
+  popularFurnitureHideLoader,
+  popularFurnitureShowLoader,
   renderFeedbackFeedbacks,
   renderFurnitureCategories,
   renderFurnitureDetailsModal,
@@ -32,7 +42,7 @@ import {
   clearForm,
 } from './modal-order';
 import iziToast from 'izitoast';
-import { closeFurnitureDetailsModal, openFurnitureDetailsModal } from './modal';
+import { closeFurnitureDetailsModal, furnitureDetailsModalAddListeners, openFurnitureDetailsModal } from './modal';
 
 let page = null;
 let currentCategory = null;
@@ -44,33 +54,69 @@ async function initialHomePage() {
   currentCategory = 'all';
   page = 1;
   try {
+    categoryShowLoader();
     const categoriesArr = await getFurnitureCategories();
-    renderFurnitureCategories(categoriesArr);
-    
+    renderFurnitureCategories(categoriesArr);    
     const firstActiveCategory = refs.furnitureCategoriesList.querySelector('.category-item[data-category-id="all"]');
     furnitureToggleActiveCategory(firstActiveCategory);
+    } catch (error) {
+    iziToast.error({
+        title: 'Помилка',
+        message: 'Сталася помилка при отриманні переліку категорій. Спробуйте, будь ласка, ще раз.',
+        position: 'topRight',
+      });
+  } finally {
+    categoryHideLoader();
+  }
     
+  try {
+    furnitureShowLoader();
     const { furnitures, totalItems, limit } = await getFurnitureFurnitures();
     renderFurnitureFurnitures(furnitures);    
-
-    furnitureHideLoader();
+  
     if (limit * page < totalItems) {
       furnitureShowLoadMoreBtn();
     }
+  } catch (error) {
+    iziToast.error({
+        title: 'Помилка',
+        message: 'Сталася помилка при отриманні товарів. Спробуйте, будь ласка, ще раз.',
+        position: 'topRight',
+      });
+  } finally {
+    furnitureHideLoader();
+  }
 
+  try {
+    popularFurnitureShowLoader();
     const { furnitures: popularFurnitures } = await getPopularFurnitures();
     renderPopularFurnitures(popularFurnitures);
     initialSwiperPopular();
+  } catch (error) {
+    iziToast.error({
+        title: 'Помилка',
+        message: 'Сталася помилка при отриманні популярних товарів. Спробуйте, будь ласка, ще раз.',
+        position: 'topRight',
+      });
+  } finally { 
+    popularFurnitureHideLoader();
+  }
 
+  initialAccordion();
+
+  try {
+    feedbackShowLoader();
     const feedbacksArr = await getFeedbackFeedbacks();
     renderFeedbackFeedbacks(feedbacksArr);
     initialSwiperFeedback();
-
-    initialAccordion();
   } catch (error) {
-    console.log(error.message);
-  } finally {
-    furnitureHideLoader();
+    iziToast.error({
+        title: 'Помилка',
+        message: 'Сталася помилка при отриманні відгуків клієнтів. Спробуйте, будь ласка, ще раз.',
+        position: 'topRight',
+      });
+  } finally { 
+    feedbackHideLoader();
   }
 }
 
@@ -126,7 +172,11 @@ async function handlerFurnitureByCategory(event) {
       furnitureShowLoadMoreBtn();
     }
   } catch (error) {
-    console.log(error.message);
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Сталася помилка при отриманні даних. Спробуйте, будь ласка, ще раз.',
+      position: 'topRight',
+      });
   } finally {
     furnitureHideLoader();
   }
@@ -148,7 +198,12 @@ async function handlerFurnitureLoadMoreBtn() {
     }
   } catch (error) {
     page--;
-    furnitureShowLoadMoreBtn();    
+    furnitureShowLoadMoreBtn();
+    iziToast.error({
+        title: 'Помилка',
+        message: 'Сталася помилка при отриманні даних. Спробуйте, будь ласка, ще раз.',
+        position: 'topRight',
+      });
   } finally {
     furnitureHideLoader();
   }
@@ -159,19 +214,31 @@ async function handlerFurnitureDetailsOpenBtn(event) {
     return;
   }
   currentModelId = event.target.closest('.furniture-item').dataset.furnitureId;
-
+  
+  furnitureDetailsHideInfo();
+  furnitureDetailsShowLoader();
+  openFurnitureDetailsModal();
   try {
     const furnitureDetails = await getFurnitureById(currentModelId);
     renderFurnitureDetailsModal(furnitureDetails);
     
     currentColor = furnitureDetails.color[0];
-    furnitureDetailsToggleCurruntColor(document.querySelector('.furniture-modal-color'));    
+    furnitureDetailsToggleCurruntColor(document.querySelector('.furniture-modal-color'));
+        
+    furnitureDetailsHideLoader();
+    furnitureDetailsShowInfo();
+    furnitureDetailsModalAddListeners();
 
-  } catch (error) {
-    console.log(error.message);    
+  } catch (error) {    
+    closeFurnitureDetailsModal();    
+      iziToast.error({
+        title: 'Помилка',
+        message: 'Сталася помилка при отриманні даних. Спробуйте, будь ласка, ще раз.',
+        position: 'topRight',
+      });
+  } finally {
+   furnitureDetailsHideLoader();
   }
-
-  openFurnitureDetailsModal();
 }
 
 function handlerFurnitureDetailsCloseBtn() {
@@ -315,6 +382,8 @@ export {
   handlerFurnitureDetailsBackdropEscape,
   handlerFurnitureDetailsSelectColor,
   handlerFurnitureDetailsOrderBtn,
+  furnitureDetailsShowLoader,
+  furnitureDetailsHideLoader,
 
   //Export order modal handlers  
   handlerOrderCloseBtn,
