@@ -1,3 +1,29 @@
-<div class="backdrop backdrop-modal" data-backdrop-furniture-details>
-  <div class="modal"></div>
+<div class="backdrop" data-backdrop-furniture-details>
+  <div class="furniture-modal">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close modal window"
+      data-backdrop-furniture-close
+    >
+      <svg class="icon-close" width="32" height="32" aria-hidden="true">
+        <use href="/img/icons.svg#close"></use>
+      </svg>
+    </button>
+
+    <ul class="furniture-modal-img-list"></ul>
+    <div class="furniture-modal-box">
+      <div class="furniture-modal-info"></div>
+      <button
+        type="button"
+        class="furniture-modal-btn"
+        data-backdrop-furniture-order
+      >
+        Перейти до замовлення
+      </button>
+    </div>
+  </div>
+  <div class="furniture-modal-loader-box">
+    <div class="loader"></div>
+  </div>
 </div>

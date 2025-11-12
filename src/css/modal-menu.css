@@ -1,2 +1,126 @@
 /*#region ===== Modal menu styles ===== */
+/* .burger-menu {
+  align-items: flex-start;
+  background-color: #ffffff;
+  transition-property: opacity, box-shadow;
+  transition-duration: 0.35s;
+  transition-timing-function: ease-in-out;
+} */
+.burger-menu {
+  flex-direction: column;
+}
+
+.burger-menu-header-wrapper,
+.burger-menu-nav-wrapper {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+}
+
+.burger-menu-nav-wrapper {
+  flex-grow: 1;
+}
+
+.burger-menu-header-container {
+  width: 100%;
+}
+
+.burger-menu-nav-container {
+  padding-top: 32px;
+}
+
+.burger-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.burger-menu-close {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.burger-nav-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.burger-nav-item {
+  display: flex;
+  justify-content: center;
+}
+
+.burger-nav-link {
+  font-weight: 600;
+  font-size: 18px;
+}
+.burger-nav-item-btn {
+  width: 100%;
+}
+
+.burger-shopping-btn {
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  height: 42px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+  background: #6b0609;
+}
+
+.body.no-scroll {
+  overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .burger-menu {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+
+  .burger-menu-nav-wrapper {
+    width: 250px;
+    position: absolute;
+    top: 72px;
+    right: calc((100vw - 768px) / 2);
+    flex-grow: 0;
+  }
+
+  .burger-menu-nav-wrapper::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 250px;
+    width: calc((100vw - 768px) / 2);
+    height: 100%;
+    background-color: #ffffff;
+  }
+
+  .burger-menu-nav-container {
+    min-width: 250px;
+    padding: 24px 32px;
+  }
+  .burger-nav-list {
+    align-items: flex-end;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .burger-menu {
+    display: none;
+  }
+}
 /*#endregion ===== MOdal menu styles ===== */

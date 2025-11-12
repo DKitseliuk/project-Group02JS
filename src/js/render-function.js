@@ -1,0 +1,306 @@
+import refs from './refs';
+import { CATEGORY_TYPE } from './constants';
+import Raty from 'raty-js';
+import starOff from '../img/raty-stars/starOff.svg';
+import starHalf from '../img/raty-stars/starHalf.svg';
+import starOn from '../img/raty-stars/starOn.svg';
+
+//#region ===== Furniture =====
+function renderFurnitureCategories(categoriesArr) {
+  const allCategoriesArr = [
+    { _id: 'all', name: 'Всі товари' },
+    ...categoriesArr,
+  ];
+
+  const allCategoriesMarkup = allCategoriesArr
+    .map(({ _id: id, name }) => {
+      return `
+        <li class="category-item"
+            data-category-id="${id}" 
+            data-category-type="${CATEGORY_TYPE[name] || 'unknown'}"
+        >
+            <p class="category-name">${name}</p>
+        </li>
+        `;
+    })
+    .join('');
+
+  refs.furnitureCategoriesList.insertAdjacentHTML(
+    'beforeend',
+    allCategoriesMarkup
+  );
+}
+
+function renderFurnitureFurnitures(furnitures) {
+  const listMarkupArr = furnitures
+    .map(({ _id: id, images, name, color, price }) => {
+      const markupColor = color
+        .map(
+          clr =>
+            `<li class="furniture-color" style="background-color: ${clr};"></li>`
+        )
+        .join('');
+
+      return `
+            <li class="furniture-item" data-furniture-id="${id}">
+                <img class="furniture-image" src="${images[0]}" alt="${name}"/>
+                <div class="furniture-info">
+                    <h3 class="furniture-name">${name}</h3>
+                    <ul class="furniture-colors">
+                        ${markupColor}
+                    </ul>
+                    <p class="furniture-price">${price} грн</p>
+                </div>
+                <button class="furniture-button" type="button">Детальніше</button>
+            </li>
+            `;
+    })
+    .join('');
+  refs.furnitureFurnituresList.insertAdjacentHTML('beforeend', listMarkupArr);   
+}
+
+function categoryShowLoader() {
+  refs.categoryLoader.classList.remove("is-hidden");
+}
+
+function categoryHideLoader() {
+  refs.categoryLoader.classList.add("is-hidden");
+}
+
+function furnitureShowLoadMoreBtn() {
+  refs.furnitureLoadMoreBtn.classList.remove('is-hidden');
+}
+
+function furnitureHideLoadMoreBtn() {  
+  refs.furnitureLoadMoreBtn.classList.add('is-hidden');
+}
+
+function furnitureShowLoader() {
+  refs.furnitureLoader.classList.remove('is-hidden');
+}
+
+function furnitureHideLoader() {
+  refs.furnitureLoader.classList.add('is-hidden');
+}
+
+function furnitureToggleActiveCategory(categoryEl) {
+  refs.furnitureCategoriesList.querySelectorAll('.category-item')
+    .forEach(category => category.classList.remove('category-item-active'));  
+  categoryEl.classList.add('category-item-active');
+}
+
+//#endregion ===== Furniture =====
+
+//#region ===== Popular furniture =====
+async function renderPopularFurnitures(furnitures) {  
+    const markup = furnitures
+      .map(item => {
+        const { _id, name, images, price, color } = item;
+        const img = images[0];
+        return `
+          <li class="furniture-item swiper-slide" data-furniture-id="${_id}">
+            <div class="furniture-data-wrapper">
+              <div class="furniture-visual">
+                <img src="${img}" alt="${name}" width="310" height="257">
+              </div>
+              <div class="furniture-info">
+                <h3 class="furniture-name">${name}</h3>
+                <ul class="color-list">
+                  ${color.map(col => `<li class="color-dot" style="background-color:${col}"></li>`).join('')}
+                </ul>
+                <p class="furniture-price">${price} грн</p>
+              </div>
+              <button class="furniture-btn" type="button">Детальніше</button>
+            </div>            
+          </li>
+        `;
+      })
+      .join('');
+
+    refs.popularFurnituresList.insertAdjacentHTML('beforeend', markup);  
+}
+
+function popularFurnitureShowLoader() {
+  refs.popularFurnitureLoader.classList.remove("is-hidden");
+}
+
+function popularFurnitureHideLoader() {
+  refs.popularFurnitureLoader.classList.add("is-hidden");
+}
+
+//#endregion ===== Popular furniture =====
+
+//#region ===== Feedback =====
+function renderFeedbackFeedbacks(feedbacks) {
+  const feedbacksMarkup = feedbacks
+    .map(({ rate, descr, name }) => {
+      return `
+        <li class="swiper-slide">
+        <div class="feedback-item">
+          <div class="feedback-rate" data-rate="${rate}"></div>
+          <p class="feedback-descr">${descr}</p>
+          <p class="feedback-author">${name}</p>
+          </div>
+        </li>`;
+    })
+    .join('');
+
+  refs.feedbackFeedbacksList.innerHTML = feedbacksMarkup;
+  refs.feedbackFeedbacksList.querySelectorAll('.feedback-rate').forEach(element => renderRaty(element));
+}
+
+function renderRaty(element) {   
+  const rate = Number.parseFloat(element.dataset.rate);  
+  const raty = new Raty(element, {
+      number: 5,
+      score: rate,
+      step: 0.5,
+      readOnly: true,
+      starOff,
+      starOn,
+      starHalf,
+      round: { down: 0.29, full: 0.79, up: 0.8 },
+  });
+  raty.init();
+}
+
+function feedbackShowLoader() {
+  refs.feedbackLoader.classList.remove("is-hidden");
+}
+
+function feedbackHideLoader() {
+  refs.feedbackLoader.classList.add("is-hidden");
+}
+
+//#endregion ===== Feedback =====
+
+//#region ===== Furniture details modal =====
+
+function renderFurnitureDetailsModal(furnitureDetails) { 
+  const {
+    name,
+    category: { name: categoryName },
+    price,
+    rate,
+    color,
+    description,
+    sizes,
+    images
+  } = furnitureDetails;
+  
+  const imagesMarkup = images
+    .map(image => {
+      return `
+        <li class="furniture-modal-img-item">
+          <img
+            class="furniture-modal-img"
+            src="${image}"
+            alt="${description}"
+            loading="lazy"
+          />
+      </li>
+      `;
+    })
+    .join('');
+  
+  const colorsMarkup = color
+    .map(colorItem => {
+      return `
+        <li
+            class="furniture-modal-color"
+            style="background-color: ${colorItem}"
+            data-color="${colorItem}"
+          >
+        </li>
+      `;
+    })
+    .join('');
+  
+  const infoMarkup = `
+    <h3 class="furniture-modal-name">${name}</h3>
+    <p class="furniture-modal-category">${categoryName}</p>
+    <p class="furniture-modal-price">${price} грн</p>
+    <div class="furniture-modal-rate" data-rate="${rate}"></div>
+    <p class="furniture-modal-subtitle">Колір</p>
+    <ul class="furniture-modal-colors">${colorsMarkup}</ul>
+    <p class="furniture-modal-description">${description}</p>
+    <p class="furniture-modal-size">Розміри: ${sizes}</p>
+  `
+  refs.furnitureDetailsImages.innerHTML = imagesMarkup;
+  refs.furnitureDetailsInfo.innerHTML = infoMarkup;
+  renderRaty(refs.furnitureDetailsInfo.querySelector('.furniture-modal-rate'));
+}
+
+function furnitureDetailsToggleCurruntColor(colorEl) {
+  document.querySelectorAll('.furniture-modal-color')
+    .forEach(item => item.classList.remove('current-color'));  
+  colorEl.classList.add('current-color');
+}
+
+function furnitureDetailsShowLoader() {
+  refs.furnitureDetailsModalLoader.style.display = "flex";
+}
+
+function furnitureDetailsHideLoader() {
+  refs.furnitureDetailsModalLoader.style.display = "none";
+}
+
+
+function furnitureDetailsShowInfo() {
+  refs.furnitureDetailsModal.style.display = "flex";
+  refs.furnitureDetailsModal.scrollTop = 0;
+}
+
+function furnitureDetailsHideInfo() {
+  refs.furnitureDetailsModal.style.display = "none";
+}
+
+
+//#endregion ===== Furniture details modal =====
+
+
+//#region ===== Order modal =====
+function showOrderLoader() {
+  refs.orderLoader.classList.remove('is-hidden');
+}
+
+function hideOrderLoader() {
+  refs.orderLoader.classList.add('is-hidden');
+}
+
+function showError(input, message) {
+  const errorText = input.parentElement.querySelector('.error-text');
+  input.classList.add('invalid');
+  if (errorText) {
+    errorText.textContent = message;
+    errorText.style.opacity = 1;
+  }
+}
+//#endregion ===== Order modal =====
+
+export {
+  renderFurnitureCategories,
+  renderFurnitureFurnitures,
+  furnitureToggleActiveCategory,
+  furnitureShowLoadMoreBtn,
+  furnitureHideLoadMoreBtn,
+  furnitureShowLoader,
+  furnitureHideLoader,
+  renderFurnitureDetailsModal,
+  furnitureDetailsToggleCurruntColor,
+  furnitureDetailsShowLoader,
+  furnitureDetailsHideLoader,
+  furnitureDetailsShowInfo,
+  renderFeedbackFeedbacks,
+  feedbackShowLoader,
+  feedbackHideLoader,
+  furnitureDetailsHideInfo,
+  showOrderLoader,
+  hideOrderLoader,
+  showError,
+  renderPopularFurnitures,
+  popularFurnitureShowLoader,
+  popularFurnitureHideLoader,
+  categoryShowLoader,
+  categoryHideLoader
+};
